@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Founder Quest: Dari Masalah ke Prototype</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#e8f3fa;--sf:#fff;--ink:#12263f;--mut:#5b6f87;--ln:#cfe0ee;--lag:#0f9d8a;--sun:#ffc43d;--cor:#ff6b57;--vio:#5b45f0;--ok:#d9f5ee;--bad:#ffe3df;--mid:#fff1cc;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1a2b;--sf:#162840;--ink:#eaf2ff;--mut:#9db2cc;--ln:#27405f;--ok:#12433d;--bad:#4a2623;--mid:#4a3d17}}
+:root[data-theme="dark"]{--bg:#0d1a2b;--sf:#162840;--ink:#eaf2ff;--mut:#9db2cc;--ln:#27405f;--ok:#12433d;--bad:#4a2623;--mid:#4a3d17}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1,h2,h3,.disp{font-family:"Fredoka","Trebuchet MS",system-ui,sans-serif;font-weight:600;line-height:1.2;margin:0}
+.wrap{max-width:680px;margin:0 auto;padding:16px}
+.hud{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding:8px 0 12px;z-index:5}
+.path{display:flex;align-items:center;gap:0}
+.node{flex:0 0 auto;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--sf);border:3px solid var(--ln);font-size:18px}
+.node.on{border-color:var(--vio);box-shadow:0 0 0 4px rgba(91,69,240,.2)}
+.node.done{background:var(--lag);border-color:var(--lag)}
+.seg{flex:1;height:4px;background:var(--ln)}.seg.done{background:var(--lag)}
+.stats{display:flex;justify-content:space-between;margin-top:10px;font-weight:600;font-size:15px}
+.chip{background:var(--sf);border:2px solid var(--ln);border-radius:999px;padding:3px 12px}
+.xp{color:var(--vio)}.combo{color:var(--cor)}
+.card{background:var(--sf);border:2px solid var(--ln);border-radius:20px;padding:22px;margin-top:6px}
+.lv{color:var(--vio);font-weight:700;font-size:14px;margin-bottom:6px}
+.q{font-size:21px;margin:4px 0 16px}
+.opt{display:block;width:100%;text-align:left;font:inherit;color:inherit;background:var(--bg);border:2px solid var(--ln);border-radius:14px;padding:13px 15px;margin-bottom:10px;cursor:pointer;transition:transform .12s,border-color .12s}
+.opt:hover:not(:disabled){border-color:var(--vio);transform:translateY(-2px)}
+.opt:focus-visible,.btn:focus-visible,input:focus-visible,.chk:focus-within{outline:3px solid var(--vio);outline-offset:2px}
+.opt:disabled{cursor:default}
+.opt.p3{background:var(--ok);border-color:var(--lag)}.opt.p2{background:var(--mid);border-color:var(--sun)}.opt.p1,.opt.p0{background:var(--bad);border-color:var(--cor)}
+.opt.dim{opacity:.55}
+.fb{border-radius:14px;padding:14px 16px;margin:6px 0 14px;animation:pop .25s ease-out}
+.fb.p3{background:var(--ok)}.fb.p2{background:var(--mid)}.fb.p1,.fb.p0{background:var(--bad)}
+.fb b{font-family:"Fredoka",system-ui,sans-serif;font-size:18px}
+@keyframes pop{from{transform:scale(.96);opacity:0}to{transform:none;opacity:1}}
+.btn{font:600 17px "Fredoka",system-ui,sans-serif;background:var(--vio);color:#fff;border:0;border-radius:14px;padding:13px 22px;cursor:pointer;box-shadow:0 4px 0 rgba(0,0,0,.25)}
+.btn:active{transform:translateY(3px);box-shadow:none}
+.btn.alt{background:var(--sf);color:var(--ink);border:2px solid var(--ln);box-shadow:none}
+input[type=text]{width:100%;font:inherit;padding:12px 14px;border-radius:12px;border:2px solid var(--ln);background:var(--bg);color:var(--ink);margin:6px 0 14px}
+label.l{font-weight:600;font-size:14px}
+.chk{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border:2px solid var(--ln);border-radius:14px;margin-bottom:10px;cursor:pointer;background:var(--bg)}
+.chk input{width:22px;height:22px;margin-top:2px;accent-color:var(--lag);flex:0 0 auto}
+.chk.on{border-color:var(--lag);background:var(--ok)}
+.stars{font-size:34px;letter-spacing:4px}
+.bar{height:14px;background:var(--bg);border-radius:99px;overflow:hidden;border:2px solid var(--ln)}
+.bar i{display:block;height:100%;background:var(--lag);border-radius:99px;transition:width .8s}
+.row{margin:14px 0}.row .t{display:flex;justify-content:space-between;font-weight:600;margin-bottom:5px;gap:8px}
+.verdict{border-radius:16px;padding:16px;margin:14px 0}
+.mut{color:var(--mut)}
+.mis{border-left:5px solid var(--sun);padding:6px 0 6px 12px;margin:10px 0}
+.acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="hud" id="hud"></div>
+<main id="main"></main>
+</div>
+<script>
+const L=[
+{n:"Temukan Masalah",e:"🔍",s:"Pemburu Masalah",tip:"Habiskan 3 hari mengamati langsung calon pelanggan bekerja. Catat setiap hambatan yang berulang, lalu rumuskan: siapa, kapan, seberapa sering, dan rugi berapa.",
+q:[
+{t:"Kamu ingin mencari ide bisnis. Dari mana kamu memulai?",o:[
+["Dari teknologi yang sedang tren, lalu mencari masalah yang cocok.",0,"Ini jebakan solusi yang mencari masalah. Mulai dari masalah nyata, bukan dari alatnya."],
+["Mengamati langsung keseharian orang di lapangan dan mencatat hambatan yang berulang.",3,"Tepat. Masalah yang berulang dan teramati langsung adalah bahan baku terbaik."],
+["Bertanya ke teman dan keluarga ide apa yang bagus.",1,"Orang dekat cenderung menyemangati, bukan menguji. Datanya bias."],
+["Membaca laporan pasar dan tren industri.",2,"Berguna untuk konteks, tapi belum membuktikan rasa sakit pelanggan. Lengkapi dengan observasi."]]},
+{t:"Kamu menemukan 'masalah': banyak UMKM kesulitan mengatur stok. Bagaimana mempertajamnya?",o:[
+["Langsung membuat daftar fitur aplikasi stok.",0,"Terlalu cepat melompat ke solusi sebelum masalahnya jelas."],
+["Merumuskan siapa yang kesulitan, kapan terjadi, seberapa sering, dan berapa kerugiannya.",3,"Tepat. Masalah yang terukur bisa diuji dan diprioritaskan."],
+["Mengecek apakah sudah ada aplikasi stok, kalau ada ganti ide.",1,"Kompetitor justru bisa jadi tanda pasar nyata. Tapi ini belum mempertajam masalahnya."],
+["Mencari artikel yang menyebut masalah serupa.",2,"Menambah konteks, tapi belum ada bukti dari pelanggan yang kamu targetkan."]]}]},
+{n:"Kenali Pelanggan",e:"🎯",s:"Pembaca Pelanggan",tip:"Persempit segmen sampai kamu bisa menyebut tempat mereka berkumpul. Cari 15 orang yang baru mengalami masalahnya dan sudah mencoba mengatasinya.",
+q:[
+{t:"Siapa target pelanggan awalmu?",o:[
+["Semua UMKM di Indonesia.",0,"Target yang terlalu luas berarti tidak ada target. Kamu tidak tahu siapa yang harus ditemui."],
+["Pemilik toko kelontong di satu kecamatan yang stoknya sering kosong atau menumpuk.",3,"Spesifik, bisa dijangkau, dan punya perilaku yang bisa diamati."],
+["UMKM kuliner usia 25 sampai 40 tahun.",2,"Lebih sempit, tapi masih demografi. Segmen yang kuat dibatasi oleh perilaku dan masalah."],
+["Siapa pun yang mau membayar.",1,"Kalimat yang nyaman tapi tidak bisa dieksekusi. Kamu belum tahu siapa mereka."]]},
+{t:"Siapa yang pertama kamu wawancarai?",o:[
+["Teman dan keluarga yang punya usaha.",1,"Mudah dijangkau, tapi mereka cenderung sungkan jujur."],
+["Orang yang baru mengalami masalah itu dan sudah mencoba mengatasinya dengan cara apa pun.",3,"Tepat. Orang yang sudah berusaha menyelesaikan masalah adalah sinyal masalah yang nyata."],
+["Pakar dan dosen di bidang terkait.",2,"Bagus untuk memahami teori, tapi mereka bukan pengguna yang merasakan masalahnya."],
+["Responden survei online sebanyak mungkin tanpa seleksi.",0,"Jumlah besar tanpa seleksi menghasilkan data yang bising dan menyesatkan."]]}]},
+{n:"Validasi Masalah",e:"🧪",s:"Detektif Validasi",tip:"Latih pertanyaan tentang masa lalu, bukan masa depan. Cari bukti perilaku: waktu, uang, atau usaha yang sudah mereka keluarkan.",
+q:[
+{t:"Saat wawancara, pertanyaan mana yang paling kuat?",o:[
+["Kalau ada aplikasi pengatur stok, kamu mau pakai?",0,"Pertanyaan hipotetis memancing jawaban sopan, bukan fakta."],
+["Ceritakan terakhir kali stokmu bermasalah. Apa yang terjadi dan apa yang kamu lakukan?",3,"Tepat. Cerita masa lalu mengungkap perilaku asli, bukan opini."],
+["Seberapa penting masalah stok bagimu, skala 1 sampai 10?",2,"Berguna sebagai pembanding, tapi tetap opini. Gali dengan cerita nyata."],
+["Menurutmu ide saya bagus tidak?",0,"Ini mengundang pujian. Pujian bukan data."]]},
+{t:"Setelah 10 wawancara, 8 orang bilang 'ide bagus!' tapi tidak ada yang pernah mencari solusi atau mengeluarkan uang untuk masalah ini. Kesimpulanmu?",o:[
+["Validasi sukses, 80% setuju.",0,"Persetujuan tanpa tindakan adalah vanity metric."],
+["Pujian bukan bukti. Tanpa usaha atau uang yang sudah keluar, masalahnya mungkin belum cukup menyakitkan.",3,"Tepat. Kamu membaca perilaku, bukan kata-kata."],
+["Perbaiki pitch supaya lebih meyakinkan.",1,"Masalahnya bukan di pitch. Kamu sedang menguji masalah, bukan menjual."],
+["Tambah wawancara sampai hasilnya bagus.",0,"Itu bias konfirmasi: mencari data yang menyenangkan, bukan data yang benar."]]}]},
+{n:"Validasi Solusi",e:"🛠️",s:"Penguji Solusi",tip:"Jalankan uji termurah: layanan manual atau landing page dengan tombol pre-order. Targetkan komitmen nyata, bukan jumlah pendaftar.",
+q:[
+{t:"Sebelum membuat prototype, apa cara termurah menguji solusimu?",o:[
+["Membangun aplikasi lengkap dulu supaya meyakinkan.",0,"Mahal dan berisiko. Kamu membangun sebelum tahu apakah ada yang mau."],
+["Uji manual (concierge) atau landing page dengan pre-order ke calon pengguna.",3,"Tepat. Murah, cepat, dan menghasilkan sinyal komitmen nyata."],
+["Membuat mockup cantik lalu menunjukkannya ke teman.",2,"Membantu visualisasi, tapi tanpa ajakan komitmen yang kamu dapat hanya komentar."],
+["Survei fitur apa yang paling diinginkan.",1,"Orang pandai menyebut fitur, tapi daftar keinginan tidak sama dengan kebutuhan."]]},
+{t:"Kamu membuka pre-order. Hasil: 40 orang daftar gratis, 2 orang membayar uang muka. Bagaimana membacanya?",o:[
+["40 pendaftar menunjukkan minat yang besar.",0,"Pendaftaran gratis tidak mengikat. Sinyal terkuat justru dua pembayar itu."],
+["Sinyal bayar yang kecil tapi nyata. Gali alasan 2 pembayar dan 38 lainnya, lalu iterasi.",3,"Tepat. Kamu fokus pada komitmen dan belajar dari penolakan."],
+["Gagal total, ganti ide.",1,"Terlalu cepat menyerah. Dua pembayar adalah titik awal untuk dipelajari."],
+["Turunkan harga sampai semua mau bayar.",1,"Diskon menutupi sinyal. Cari tahu dulu apa yang membuat orang enggan."]]}]}
+];
+const G=[
+"Sudah mewawancarai minimal 15 calon pengguna yang sesuai segmen.",
+"Bisa menyebut masalah dalam satu kalimat lengkap dengan kerugian yang terukur.",
+"Minimal 3 orang menunjukkan komitmen nyata (bayar, pre-order, atau surat minat).",
+"Pola keluhan yang sama muncul di minimal 5 wawancara.",
+"Sudah menguji solusi versi manual atau landing page tanpa membangun produk penuh.",
+"Bisa menyebut 3 fitur inti (bukan 10) yang wajib ada di prototype."];
+const st={lv:0,qi:0,xp:0,combo:0,best:0,sc:[0,0,0,0],gate:[],idea:"",done:false,ans:false};
+const $=s=>document.querySelector(s),M=$("#main");
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+function hud(){
+ let h='<div class="path">';
+ for(let i=0;i<5;i++){h+=`<div class="node ${i<st.lv?'done':''} ${i===st.lv&&!st.done?'on':''}" title="${i<4?L[i].n:'Gerbang Prototype'}">${i<4?L[i].e:'🚀'}</div>`;if(i<4)h+=`<div class="seg ${i<st.lv?'done':''}"></div>`}
+ h+=`</div><div class="stats"><span class="chip xp">⭐ ${st.xp} XP</span><span class="chip combo">🔥 Kombo x${st.combo}</span></div>`;
+ $("#hud").innerHTML=h;
+}
+function intro(){
+ hud();
+ M.innerHTML=`<div class="card"><h1 style="font-size:30px">Founder Quest</h1>
+ <p class="disp" style="font-size:19px;color:var(--lag);margin:6px 0 12px">Dari masalah sampai siap prototype</p>
+ <p>Kamu akan menjalani 4 level misi dan 1 gerbang akhir. Di setiap level ada situasi nyata yang sering dihadapi founder. Pilih langkah yang menurutmu paling tepat. Jawaban terbaik memberi XP penuh, dan jawaban yang tepat berturut-turut membuka kombo.</p>
+ <p class="mut">Waktu bermain sekitar 7 menit. Tidak ada jawaban yang dihakimi, setiap pilihan datang dengan penjelasan.</p>
+ <label class="l" for="ide">Nama atau ide bisnismu (opsional)</label>
+ <input type="text" id="ide" maxlength="60" placeholder="Contoh: aplikasi stok untuk warung">
+ <button class="btn" id="go">Mulai Ekspedisi</button></div>`;
+ $("#go").onclick=()=>{st.idea=$("#ide").value.trim();lvIntro()};
+}
+function lvIntro(){
+ hud();const l=L[st.lv];
+ M.innerHTML=`<div class="card" style="text-align:center"><div style="font-size:56px">${l.e}</div><div class="lv">LEVEL ${st.lv+1} DARI 5</div><h2 style="font-size:28px">${l.n}</h2>
+ <p class="mut">${st.lv===0?"Semua bisnis besar dimulai dari satu masalah yang jelas.":st.lv===1?"Masalah tanpa pelanggan yang spesifik hanya jadi keluhan umum.":st.lv===2?"Saatnya membuktikan masalahnya benar-benar ada dan menyakitkan.":"Uji solusimu sebelum menghabiskan waktu dan uang membangunnya."}</p>
+ <button class="btn" id="go">Masuk Level</button></div>`;
+ $("#go").onclick=()=>{st.qi=0;ques()};
+}
+function ques(){
+ hud();st.ans=false;const l=L[st.lv],q=l.q[st.qi];
+ M.innerHTML=`<div class="card"><div class="lv">${l.e} ${l.n} · Situasi ${st.qi+1} dari 2</div><h2 class="q">${esc(q.t)}</h2><div id="opts"></div><div id="fb"></div></div>`;
+ const box=$("#opts");
+ shuf(q.o).forEach(o=>{const b=document.createElement("button");b.className="opt";b.textContent=o[0];b.onclick=()=>pick(b,o,q);box.appendChild(b)});
+}
+function pick(b,o,q){
+ if(st.ans)return;st.ans=true;const p=o[1];
+ document.querySelectorAll(".opt").forEach(x=>{x.disabled=true;if(x!==b)x.classList.add("dim")});
+ b.classList.add("p"+p);
+ const best=q.o.find(x=>x[1]===3);
+ let gain=p*10;
+ if(p>=2){st.combo++;if(st.combo>=2)gain+=st.combo*2}else st.combo=0;
+ st.best=Math.max(st.best,st.combo);st.xp+=gain;st.sc[st.lv]+=p;hud();
+ const head=p===3?"Luar biasa! +"+gain+" XP":p===2?"Cukup baik. +"+gain+" XP":p===1?"Kurang tepat. +"+gain+" XP":"Jebakan! +0 XP";
+ const last=st.qi===1;
+ $("#fb").innerHTML=`<div class="fb p${p}"><b>${head}</b><p style="margin:6px 0 0">${esc(o[2])}</p>${p<3?`<p style="margin:8px 0 0"><b style="font-size:15px">Langkah terbaik:</b> ${esc(best[0])}</p>`:""}</div><button class="btn" id="nx">${last?"Selesaikan Level":"Lanjut"}</button>`;
+ $("#nx").onclick=()=>last?lvDone():(st.qi++,ques());
+ $("#nx").focus();
+}
+function lvDone(){
+ const s=st.sc[st.lv],stars=s>=6?3:s>=4?2:1,l=L[st.lv];
+ M.innerHTML=`<div class="card" style="text-align:center"><div class="lv">LEVEL ${st.lv+1} SELESAI</div><h2 style="font-size:28px">${l.n}</h2>
+ <div class="stars" aria-label="${stars} dari 3 bintang">${"⭐".repeat(stars)}${"☆".repeat(3-stars)}</div>
+ <p class="mut">Skor level: ${s} dari 6. ${stars===3?"Sempurna, kamu berpikir seperti founder yang berbasis bukti.":stars===2?"Bagus, tinggal sedikit lagi.":"Level ini perlu latihan, nanti ada saran di hasil akhir."}</p>
+ <button class="btn" id="go">${st.lv<3?"Ke Level Berikutnya":"Menuju Gerbang Prototype"}</button></div>`;
+ $("#go").onclick=()=>{st.lv++;st.lv<4?lvIntro():gate()};
+}
+function gate(){
+ hud();
+ M.innerHTML=`<div class="card"><div class="lv">🚀 LEVEL 5 · GERBANG PROTOTYPE</div><h2 class="q">Pertarungan terakhir: tunjukkan buktinya</h2>
+ <p class="mut">Ini bagian yang jujur. Centang hanya yang benar-benar sudah kamu lakukan untuk ${st.idea?"<b>"+esc(st.idea)+"</b>":"idemu"}, bukan yang rencananya akan dilakukan. Gerbang hanya terbuka untuk bukti.</p>
+ <div id="gl"></div><button class="btn" id="go">Buka Gerbang</button></div>`;
+ const gl=$("#gl");
+ G.forEach((t,i)=>{const lb=document.createElement("label");lb.className="chk";lb.innerHTML=`<input type="checkbox"><span>${esc(t)}</span>`;
+ lb.querySelector("input").onchange=e=>{lb.classList.toggle("on",e.target.checked);st.gate[i]=e.target.checked};gl.appendChild(lb)});
+ $("#go").onclick=()=>{const n=G.filter((_,i)=>st.gate[i]).length;st.xp+=n*15;st.lv=4;st.done=true;hud();result(n)};
+}
+function result(g){
+ const tot=st.sc.reduce((a,b)=>a+b,0),pts=tot+g*2,pct=Math.round(pts/36*100);
+ const pcts=st.sc.map(s=>Math.round(s/6*100)).concat([Math.round(g/6*100)]);
+ const names=L.map(l=>l.n).concat(["Gerbang Prototype"]);
+ let v,cls,msg;
+ if(pct>=80&&g>=4){v="🚀 Layak Dibuatkan Prototype";cls="ok";msg="Pola pikir dan buktimu sudah kuat. Langkah berikutnya: tetapkan 3 fitur inti, tentukan satu metrik sukses, dan bangun prototype dalam 2 sampai 4 minggu."}
+ else if(pct>=55&&g>=3){v="🟡 Hampir Siap, Perlu Validasi Tambahan";cls="mid";msg="Fondasimu cukup baik tapi buktinya belum mengunci. Tutup celah di level terlemah sebelum membangun apa pun."}
+ else{v="🔴 Belum Layak, Kembali ke Lapangan";cls="bad";msg="Membangun prototype sekarang berisiko membuang waktu dan uang. Perkuat bukti di level terlemah, lalu mainkan ulang."}
+ if(pct>=80&&g<4)msg="Pemahamanmu bagus, tapi tahu cara tidak sama dengan punya bukti. Skor gerbang masih rendah, kumpulkan komitmen nyata dulu.";
+ if(pct>=80&&g<4){v="🟡 Teori Kuat, Bukti Belum Cukup";cls="mid"}
+ const mx=Math.max(...pcts),mn=Math.min(...pcts);
+ const bi=pcts.indexOf(mx),wi=pcts.indexOf(mn);
+ const title=(bi<4?L[bi].s:"Pembawa Bukti");
+ const wtip=wi<4?L[wi].tip:"Kumpulkan bukti komitmen nyata: minimal 3 pre-order atau surat minat dari pengguna yang sesuai segmen, sebelum menulis satu baris kode.";
+ const rows=names.map((n,i)=>`<div class="row"><div class="t"><span>${i<4?L[i].e:"🚀"} ${n}</span><span>${pcts[i]}%</span></div><div class="bar"><i style="width:0" data-w="${pcts[i]}%"></i></div></div>`).join("");
+ M.innerHTML=`<div class="card"><div class="lv">HASIL EKSPEDISI${st.idea?" · "+esc(st.idea):""}</div>
+ <h2 style="font-size:28px">Gelarmu: ${title}</h2>
+ <p class="mut">${st.xp} XP · Skor kesiapan ${pct}% · Kombo terbaik x${st.best} · Bukti gerbang ${g} dari 6</p>
+ <div class="verdict" style="background:var(--${cls})"><h3 style="font-size:21px;margin-bottom:6px">${v}</h3><p style="margin:0">${msg}</p></div>
+ ${rows}
+ <div class="mis"><b>Misi berikutnya, ${names[wi]}:</b><br>${esc(wtip)}</div>
+ <p class="mut" style="font-size:14px">Catatan: asesmen ini mengukur cara berpikir dan bukti yang kamu laporkan sendiri. Hasilnya panduan refleksi, bukan jaminan keberhasilan bisnis.</p>
+ <div class="acts"><button class="btn" id="re">Main Lagi</button><button class="btn alt" id="cp">Salin Ringkasan</button></div><p id="cm" class="mut" style="font-size:14px"></p></div>`;
+ requestAnimationFrame(()=>setTimeout(()=>document.querySelectorAll(".bar i").forEach(i=>i.style.width=i.dataset.w),60));
+ $("#re").onclick=()=>{Object.assign(st,{lv:0,qi:0,xp:0,combo:0,best:0,sc:[0,0,0,0],gate:[],done:false,ans:false});intro()};
+ $("#cp").onclick=()=>{
+  const txt=`Founder Quest${st.idea?" ("+st.idea+")":""}\nGelar: ${title}\nSkor kesiapan: ${pct}% | XP: ${st.xp}\nVerdict: ${v.replace(/^\S+\s/,"")}\n`+names.map((n,i)=>`- ${n}: ${pcts[i]}%`).join("\n");
+  const ok=()=>$("#cm").textContent="Ringkasan tersalin.",no=()=>$("#cm").textContent="Gagal menyalin, silakan salin manual.";
+  try{navigator.clipboard.writeText(txt).then(ok,no)}catch(e){no()}};
+}
+intro();
+</script>
+</body>
+</html>
