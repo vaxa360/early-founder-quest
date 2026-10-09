@@ -1,3 +1,4 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -66,6 +67,8 @@ h1{font-size:34px;text-shadow:3px 3px 0 var(--pink)}
 .mut{color:var(--mut)}
 .mis{border:3px dashed var(--bd);border-radius:16px;padding:12px 14px;margin:14px 0;background:var(--fld)}
 .acts{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+.snd{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));width:52px;height:52px;border-radius:16px;border:3px solid var(--bd);background:var(--yel);font-size:24px;cursor:pointer;box-shadow:4px 4px 0 var(--sh);z-index:20}
+.snd:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--sh)}
 .cf{position:fixed;top:-20px;width:10px;height:16px;border-radius:2px;z-index:50;pointer-events:none;animation:fall linear forwards}
 @keyframes pop{from{transform:scale(.95);opacity:0}to{transform:none;opacity:1}}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
@@ -82,62 +85,74 @@ h1{font-size:34px;text-shadow:3px 3px 0 var(--pink)}
 </div>
 <script>
 const L=[
-{n:"Temukan Masalah",e:"🔍",tip:"Selama 3 hari saat istirahat, amati kantin sekolahmu. Catat lama antre, jam paling padat, dan berapa siswa yang menyerah. Lalu tulis masalahnya dalam satu kalimat: siapa, kapan, dan berapa waktu yang terbuang.",
+{n:"Temukan Masalah",e:"🔍",tip:"Data 15 temanmu yang punya skill kreatif: apakah pernah dapat klien berbayar, berapa kali, dan apa kendalanya. Lalu tulis masalahnya dalam satu kalimat: siapa yang terdampak, apa yang terjadi, dan berapa banyak.",
 q:[
-{t:"Kamu sering telat masuk kelas karena antre di kantin SMK. Langkah pertama untuk memastikan ini masalah nyata?",o:[
-["Langsung membuat aplikasi pesan makanan sekolah.",0,"Itu melompat ke solusi. Pastikan dulu masalahnya nyata dan sering terjadi."],
-["Mengamati antrean saat istirahat selama 3 hari, mencatat lama antre dan siapa yang gagal jajan.",3,"Tepat. Data pengamatan langsung lebih kuat daripada perasaan."],
-["Bertanya ke 2 teman dekat, 'antre kantin nyebelin kan?'",1,"Pertanyaannya menggiring. Teman dekat akan setuju supaya sopan."],["Membaca artikel tentang kantin sekolah di internet.",2,"Memberi konteks, tapi belum menunjukkan kondisi nyata di sekolahmu."]]},
-{t:"Hasil pengamatan: rata-rata antre 12 menit dari 20 menit istirahat. Bagaimana merumuskan masalahnya?",o:[
-["Kantin sekolah kurang bagus.",0,"Terlalu kabur dan tidak bisa diuji."],
-["Siswa kehilangan separuh waktu istirahat untuk antre, dan sebagian gagal jajan sama sekali.",3,"Tepat. Jelas siapa yang terdampak dan seberapa besar dampaknya."],
-["Siswa malas antre.",1,"Itu menyalahkan perilaku, bukan memahami penyebab."],["Antrean kantin terlalu panjang.",2,"Mendekati, tapi belum ada angka dan belum jelas siapa yang terdampak."]]},
-{t:"Kamu menemukan tiga keluhan: antre panjang, menu kurang variatif, harga naik. Mana yang dikejar?",o:[
+{t:"Banyak temanmu jago desain dan edit video, tapi hampir tidak ada yang pernah dapat klien. Langkah pertama untuk memastikan ini masalah nyata?",o:[
+["Langsung membuat website marketplace jasa siswa SMK.",0,"Itu melompat ke solusi. Pastikan dulu masalahnya nyata dan sering terjadi."],
+["Mendata 15 temanmu yang punya skill: sudah pernah menawarkan jasa atau belum, dapat berapa klien, dan apa kendalanya.",3,"Tepat. Data dari kondisi nyata lebih kuat daripada perasaan."],
+["Bertanya ke 2 teman dekat, 'susah ya cari klien?'",1,"Pertanyaannya menggiring. Teman dekat akan setuju supaya sopan."],
+["Membaca artikel tentang tren freelancer muda di internet.",2,"Memberi konteks, tapi belum menunjukkan kondisi nyata di sekolahmu."]]},
+{t:"Hasil pendataan: dari 15 siswa berskill, 12 belum pernah dapat klien berbayar dan 9 bilang tidak tahu cara mencari klien. Bagaimana merumuskan masalahnya?",o:[
+["Anak SMK kurang percaya diri.",0,"Itu asumsi tentang sikap, belum ada bukti penyebabnya."],
+["Siswa SMK punya skill desain dan konten, tapi sebagian besar belum pernah dapat klien berbayar karena tidak tahu cara menemukannya.",3,"Tepat. Jelas siapa yang terdampak, apa yang terjadi, dan ukurannya."],
+["Skill siswa SMK belum bagus.",1,"Kamu belum mengujinya. Bisa jadi skillnya cukup, aksesnya yang kurang."],
+["Siswa SMK sulit dapat klien.",2,"Mendekati, tapi belum ada angka dan penyebab yang jelas."]]},
+{t:"Kamu menemukan tiga keluhan: tidak tahu cara cari klien, tidak tahu cara pasang harga, dan takut ditipu klien. Mana yang dikejar?",o:[
 ["Ketiganya sekaligus supaya dampaknya besar.",0,"Fokus terpecah. Tim kecil harus memilih satu."],
-["Yang paling sering terjadi dan paling merugikan, dicek dengan data pengamatan.",3,"Tepat. Prioritas berdasar frekuensi dan dampak."],
-["Yang solusinya paling gampang dibuat.",1,"Mudah belum tentu penting. Bisa jadi kamu menyelesaikan masalah kecil."],["Yang paling sering dikeluhkan teman-temanmu di grup chat.",2,"Keluhan ramai bisa jadi sinyal, tapi belum tentu paling sering atau paling merugikan. Cek dengan pengamatan."]]}]},
-{n:"Kenali Pelanggan",e:"🎯",tip:"Daftar 15 siswa yang paling sering terdampak antrean dan 2 orang dari pihak kantin. Tulis ciri perilaku mereka, bukan hanya usia atau kelas, lalu jadwalkan wawancara 15 menit untuk masing-masing.",
+["Yang paling sering dan paling menghambat, dicek dengan data pendataan dan wawancara.",3,"Tepat. Prioritas berdasar frekuensi dan dampak."],
+["Yang solusinya paling gampang dibuat.",1,"Mudah belum tentu penting. Bisa jadi kamu menyelesaikan masalah kecil."],
+["Yang paling ramai dibahas di grup chat angkatan.",2,"Ramai bisa jadi sinyal, tapi belum tentu paling sering atau paling merugikan. Cek dengan data."]]}]},
+{n:"Kenali Pelanggan",e:"🎯",tip:"Daftar 10 UMKM di sekitar sekolah yang media sosialnya jarang diperbarui dan 5 siswa kreator. Tulis ciri perilaku mereka, bukan hanya usia atau jurusan, lalu jadwalkan wawancara 15 menit untuk masing-masing.",
 q:[
-{t:"Siapa target pelanggan pertamamu?",o:[
-["Semua siswa dan guru di sekolah.",0,"Terlalu luas. Kebutuhan tiap kelompok berbeda."],
-["Siswa kelas X dan XI yang istirahatnya hanya 20 menit dan jajan di kantin tiap hari.",3,"Spesifik, mudah ditemui, dan perilakunya jelas."],
-["Siswa yang suka makan.",1,"Kriteria ini tidak membedakan siapa yang benar-benar punya masalah."],["Siswa kelas X saja karena jumlahnya paling banyak.",2,"Lebih sempit, tapi jumlah banyak belum berarti mereka paling merasakan masalah."]]},
+{t:"Siapa target pelanggan berbayar pertamamu?",o:[
+["Semua bisnis di kota.",0,"Terlalu luas. Kebutuhan tiap bisnis berbeda."],
+["UMKM makanan dan minuman dalam radius 1 km dari sekolah yang aktif di Instagram atau TikTok tapi kontennya jarang diperbarui.",3,"Spesifik, mudah ditemui, dan perilakunya jelas."],
+["Perusahaan besar supaya bayarannya besar.",1,"Sulit dijangkau dan belum tentu mau memakai jasa siswa pemula."],
+["UMKM yang pemiliknya berusia di bawah 40 tahun.",2,"Lebih sempit, tapi usia tidak menunjukkan siapa yang benar-benar butuh konten."]]},
 {t:"Siapa yang pertama kamu wawancarai?",o:[
-["Teman sekelas yang paling akrab.",1,"Mudah dijangkau, tapi cenderung sungkan jujur."],
-["Siswa yang sering gagal jajan dan sudah punya cara sendiri, seperti titip teman atau bawa bekal.",3,"Tepat. Orang yang sudah berusaha mengatasi masalah adalah sinyal kuat."],
-["Semua orang lewat polling story Instagram.",0,"Banyak jawaban tanpa seleksi menghasilkan data yang bising."],["Pengurus OSIS karena mereka mewakili siswa.",1,"Mereka belum tentu yang paling sering mengalami masalahnya."]]},
-{t:"Ternyata ada pihak lain: ibu kantin yang melayani semua pesanan. Apa yang kamu lakukan?",o:[
-["Abaikan, fokus pada siswa saja.",0,"Solusimu pasti melibatkan ibu kantin. Tanpa dia, solusi tidak jalan."],
-["Wawancarai juga ibu kantin tentang cara kerja dan kendalanya, serta apakah dia mau berubah.",3,"Tepat. Bisnis dua sisi perlu memahami kedua pihak."],
-["Tanya ibu kantin, 'bagus tidak ideku?'",2,"Cukup, tapi itu meminta opini. Gali cara kerja dan kendalanya."],["Tunggu idenya matang dulu, baru bicara dengan ibu kantin.",1,"Ide yang belum pernah dibahas dengannya berisiko ditolak. Libatkan sejak awal."]]}]},
-{n:"Validasi Masalah",e:"🧪",tip:"Tulis ulang pertanyaan wawancaramu menjadi pertanyaan cerita masa lalu. Wawancarai 15 siswa, tandai jawaban yang berisi tindakan nyata (titip teman, bawa bekal, jajan di luar), dan abaikan pujian.",
+["Orang tua temanmu yang punya usaha.",1,"Mudah dijangkau, tapi cenderung sungkan jujur."],
+["Pemilik UMKM yang sudah pernah mencoba mengurus konten sendiri atau membayar orang untuk membuatnya.",3,"Tepat. Orang yang sudah berusaha mengatasi masalah adalah sinyal kuat."],
+["Semua pengikut akun sekolah lewat polling story.",0,"Banyak jawaban tanpa seleksi menghasilkan data yang bising."],
+["Guru bidang pemasaran digital.",2,"Bagus untuk memahami teori, tapi mereka bukan pemilik usaha yang merasakan masalahnya."]]},
+{t:"Bisnismu punya sisi lain: teman-teman kreator yang akan mengerjakan pesanan. Apa yang kamu lakukan?",o:[
+["Anggap saja mereka pasti mau ikut.",0,"Tanpa mereka tidak ada yang mengerjakan. Jangan berasumsi."],
+["Wawancarai juga siswa kreator tentang waktu, kualitas kerja, dan kesiapan mereka terikat tenggat dari klien.",3,"Tepat. Bisnis dua sisi perlu memahami kedua pihak."],
+["Tanya mereka, 'ideku bagus tidak?'",2,"Cukup, tapi itu meminta opini. Gali kemampuan dan kendalanya."],
+["Tunggu sampai ada klien, baru bicara dengan mereka.",1,"Kamu bisa kehabisan tenaga kerja saat klien datang. Libatkan sejak awal."]]}]},
+{n:"Validasi Masalah",e:"🧪",tip:"Tulis ulang pertanyaan wawancaramu menjadi pertanyaan cerita masa lalu. Wawancarai 15 pemilik UMKM, tandai jawaban berisi tindakan nyata (menyewa admin, membayar desain, mencoba sendiri), dan abaikan pujian.",
 q:[
-{t:"Pertanyaan wawancara mana yang paling kuat untuk siswa?",o:[
-["Kalau ada aplikasi pesan kantin, kamu mau pakai?",0,"Pertanyaan hipotetis. Jawaban sopan bukan fakta."],
-["Ceritakan terakhir kali kamu gagal jajan. Apa yang terjadi dan apa yang kamu lakukan?",3,"Tepat. Cerita masa lalu mengungkap perilaku asli."],
-["Menurutmu ideku keren tidak?",0,"Itu mengundang pujian. Pujian bukan data."],["Seberapa sering kamu jajan di kantin dalam seminggu?",2,"Berguna untuk data kebiasaan, tapi belum menggali masalah dan cara mengatasinya."]]},
-{t:"Dari 12 siswa, 10 bilang 'iya, antre itu nyebelin'. Tapi hanya 2 yang pernah mencari cara mengatasinya. Kesimpulanmu?",o:[
-["10 dari 12 setuju, masalah tervalidasi!",0,"Keluhan itu murah. Yang penting adalah tindakan nyata mengatasinya."],
-["Keluhan banyak tapi usaha mengatasinya sedikit. Gali lagi siapa yang benar-benar terdampak.",3,"Tepat. Kamu membaca perilaku, bukan kata-kata."],
-["Tambah wawancara sampai angkanya bagus.",1,"Itu bias konfirmasi, mencari data yang menyenangkan."],["Abaikan 2 orang itu, 10 lainnya sudah cukup.",0,"Justru 2 orang yang bertindak itu sinyal paling berharga untuk digali."]]},
-{t:"Temanmu bilang, 'Pasti jalan, aku siap bantu!' tapi tidak mau ikut wawancara atau mencoba. Sikapmu?",o:[
+{t:"Pertanyaan wawancara mana yang paling kuat untuk pemilik UMKM?",o:[
+["Kalau ada jasa konten dari siswa SMK, kamu mau pakai?",0,"Pertanyaan hipotetis. Jawaban sopan bukan fakta."],
+["Ceritakan terakhir kali kamu butuh konten untuk promosi. Apa yang kamu lakukan dan berapa biayanya?",3,"Tepat. Cerita masa lalu mengungkap perilaku asli."],
+["Menurutmu ideku keren tidak?",0,"Itu mengundang pujian. Pujian bukan data."],
+["Seberapa sering kamu posting di media sosial dalam seminggu?",2,"Berguna untuk data kebiasaan, tapi belum menggali masalah dan cara mengatasinya."]]},
+{t:"Dari 12 pemilik UMKM, 10 bilang 'konten itu penting, aku kewalahan'. Tapi hanya 2 yang pernah mengeluarkan uang untuk membuatnya. Kesimpulanmu?",o:[
+["10 dari 12 setuju, masalah tervalidasi!",0,"Keluhan itu murah. Yang penting adalah uang dan usaha yang benar-benar keluar."],
+["Keluhan banyak tapi yang mengeluarkan uang sedikit. Gali siapa 2 orang itu dan kenapa mereka mau membayar.",3,"Tepat. Kamu membaca perilaku, bukan kata-kata."],
+["Tambah wawancara sampai angkanya bagus.",1,"Itu bias konfirmasi, mencari data yang menyenangkan."],
+["Abaikan 2 orang itu, 10 lainnya sudah cukup.",0,"Justru 2 orang yang membayar itu sinyal paling berharga untuk digali."]]},
+{t:"Temanmu bilang, 'Pasti laris, aku siap jadi tim!' tapi tidak mau ikut wawancara atau mencoba. Sikapmu?",o:[
 ["Anggap itu bukti dukungan yang kuat.",0,"Dukungan lisan itu murah. Bukti adalah tindakan."],
-["Hargai, tapi catat sebagai opini. Cari bukti dari calon pengguna yang mau bertindak.",3,"Tepat. Kamu memisahkan semangat dari bukti."],
-["Abaikan dia sepenuhnya.",1,"Terlalu keras. Hargai dukungannya, tapi jangan jadikan data."],["Ajak dia jadi pembeli pertama dan lihat apakah dia benar-benar membayar.",2,"Cara bagus menguji komitmen, tapi tetap cari bukti dari calon pengguna sebenarnya, bukan hanya temanmu."]]}]},
-{n:"Validasi Solusi",e:"🛠️",tip:"Buka pre-order manual selama 1 minggu lewat WhatsApp atau Google Form dan antar sendiri pesanannya. Targetkan minimal 3 pembeli yang benar-benar membayar, lalu catat alasan yang tidak jadi memesan.",
+["Hargai, tapi catat sebagai opini. Cari bukti dari calon pelanggan yang mau bertindak.",3,"Tepat. Kamu memisahkan semangat dari bukti."],
+["Abaikan dia sepenuhnya.",1,"Terlalu keras. Hargai dukungannya, tapi jangan jadikan data."],
+["Ajak dia jadi kreator pertama dan lihat apakah dia benar-benar mengerjakan.",2,"Cara bagus menguji komitmen, tapi tetap cari bukti dari pelanggan sebenarnya, bukan hanya temanmu."]]}]},
+{n:"Validasi Solusi",e:"🛠️",tip:"Tawarkan paket konten manual lewat WhatsApp selama 2 minggu dan kerjakan dengan tim kecil siswa. Targetkan minimal 3 UMKM yang benar-benar membayar, lalu catat alasan yang tidak jadi memesan.",
 q:[
-{t:"Sebelum membuat aplikasi, apa cara termurah menguji solusi pre-order kantin?",o:[
-["Membangun aplikasi lengkap dulu supaya meyakinkan.",0,"Mahal dan berisiko. Kamu belum tahu ada yang mau."],
-["Membuka pre-order manual lewat WhatsApp atau Google Form selama seminggu, lalu mengantar pesanan ke kelas.",3,"Tepat. Murah, cepat, dan memberi sinyal komitmen nyata."],
-["Membuat desain aplikasi cantik lalu menunjukkannya ke teman.",2,"Membantu visualisasi, tapi tanpa ajakan memesan kamu hanya dapat komentar."],["Survei 100 siswa tentang fitur aplikasi yang diinginkan.",1,"Orang pandai menyebut fitur, tapi daftar keinginan tidak sama dengan kebutuhan."]]},
-{t:"Pre-order dibuka: 40 siswa mengisi formulir, tapi hanya 6 yang memesan dan membayar. Cara membacanya?",o:[
-["40 pengisi formulir membuktikan minat besar.",0,"Mengisi formulir itu gratis. Pesanan berbayar adalah sinyal sebenarnya."],
-["6 pembeli adalah sinyal nyata. Tanyakan alasan 6 pembeli dan 34 lainnya, lalu perbaiki.",3,"Tepat. Fokus pada komitmen dan belajar dari penolakan."],
-["Gagal, ganti ide.",1,"Terlalu cepat menyerah. Enam pembeli adalah titik awal belajar."],["Turunkan harga sampai semua pengisi formulir mau membayar.",1,"Diskon menutupi sinyal. Cari tahu dulu apa yang membuat mereka enggan."]]},
-{t:"Pesanan berjalan, tapi kamu kewalahan mengantar manual ke 6 kelas. Apa tindakanmu?",o:[
-["Langsung membuat aplikasi canggih untuk mengotomatisasi semuanya.",0,"Terlalu dini. Otomatisasi sebelum pola terbukti membuang tenaga."],
-["Mencatat bagian yang paling merepotkan dan yang paling dihargai pelanggan, lalu memilih 3 fitur inti untuk prototype.",3,"Tepat. Prototype lahir dari pola nyata, bukan tebakan."],
-["Menghentikan layanan sampai sistemnya siap.",1,"Kamu kehilangan momentum dan pembelajaran dari pelanggan."],["Minta teman yang jago coding membuat aplikasinya supaya cepat selesai.",1,"Cepat, tapi kamu membangun sebelum tahu fitur mana yang benar-benar dibutuhkan."]]}]}
+{t:"Sebelum membuat platform, apa cara termurah menguji solusi jasa konten siswa?",o:[
+["Membangun website marketplace lengkap dulu supaya meyakinkan.",0,"Mahal dan berisiko. Kamu belum tahu ada yang mau."],
+["Menawarkan paket konten manual lewat WhatsApp ke UMKM, dikerjakan tim kecil siswa selama 2 minggu.",3,"Tepat. Murah, cepat, dan memberi sinyal komitmen nyata."],
+["Membuat desain tampilan platform lalu menunjukkannya ke teman.",2,"Membantu visualisasi, tapi tanpa ajakan membeli kamu hanya dapat komentar."],
+["Survei 100 UMKM tentang fitur platform yang diinginkan.",1,"Orang pandai menyebut fitur, tapi daftar keinginan tidak sama dengan kebutuhan."]]},
+{t:"Penawaran paket dibuka: 30 UMKM bilang tertarik, tapi hanya 5 yang membayar. Cara membacanya?",o:[
+["30 yang tertarik membuktikan minat besar.",0,"Tertarik itu gratis. Pembayaran adalah sinyal sebenarnya."],
+["5 pembayar adalah sinyal nyata. Tanyakan alasan 5 pembayar dan 25 lainnya, lalu perbaiki.",3,"Tepat. Fokus pada komitmen dan belajar dari penolakan."],
+["Gagal, ganti ide.",1,"Terlalu cepat menyerah. Lima pembayar adalah titik awal belajar."],
+["Turunkan harga sampai semua yang tertarik mau membayar.",1,"Diskon menutupi sinyal. Cari tahu dulu apa yang membuat mereka enggan."]]},
+{t:"Pesanan berjalan, tapi kamu kewalahan mengatur jadwal kreator dan revisi klien lewat chat. Apa tindakanmu?",o:[
+["Langsung membuat platform canggih untuk mengotomatisasi semuanya.",0,"Terlalu dini. Otomatisasi sebelum pola terbukti membuang tenaga."],
+["Mencatat bagian yang paling merepotkan dan yang paling dihargai klien, lalu memilih 3 fitur inti untuk prototype.",3,"Tepat. Prototype lahir dari pola nyata, bukan tebakan."],
+["Menghentikan layanan sampai sistemnya siap.",1,"Kamu kehilangan momentum dan pembelajaran dari pelanggan."],
+["Minta teman yang jago coding membuat platformnya supaya cepat selesai.",1,"Cepat, tapi kamu membangun sebelum tahu fitur mana yang benar-benar dibutuhkan."]]}]}
 ];
 const GM=[
 "Wawancarai sampai 15 calon pengguna yang sesuai segmen, dan tetapkan target jumlah wawancara per minggu.",
@@ -167,15 +182,15 @@ function intro(){
  hud();
  M.innerHTML=`<div class="card"><div class="hero">🚀<span>💡</span><span>🧪</span><span>⭐</span></div><h1>Founder Quest</h1>
  <p class="disp" style="font-size:19px;color:var(--lag);margin:6px 0 12px">Dari masalah sampai siap prototype</p>
- <div class="mis" style="margin-top:0"><b>📍 Studi kasus:</b> Kamu siswa SMK. Istirahat cuma 20 menit, tapi antrean kantin panjang dan banyak temanmu gagal jajan. Dari masalah kecil inilah perjalananmu sebagai founder dimulai, dari menemukan masalah sampai membuktikan solusinya layak dibuatkan prototype.</div><p>Ada 4 level dengan 3 situasi di tiap level, lalu 1 gerbang akhir. Pilih langkah yang paling tepat. Jawaban terbaik memberi XP penuh, dan jawaban tepat berturut-turut membuka kombo.</p>
- <p class="mut">Waktu bermain sekitar 12 menit. Setiap pilihan datang dengan penjelasan.</p>
+ <div class="mis" style="margin-top:0"><b>📍 Studi kasus:</b> Kamu siswa SMK. Banyak temanmu jago desain dan edit video, tapi hampir tidak ada yang pernah dapat klien. Di sisi lain, warung, kafe, dan toko di sekitar sekolah butuh konten TikTok dan Instagram tapi bingung mencari siapa yang mengerjakan. Dari celah inilah perjalananmu sebagai founder dimulai, dari menemukan masalah sampai membuktikan solusinya layak dibuatkan prototype.</div><p>Ada 4 level dengan 3 situasi di tiap level, lalu 1 gerbang akhir. Pilih langkah yang paling tepat. Jawaban terbaik memberi XP penuh, dan jawaban tepat berturut-turut membuka kombo.</p>
+ <p class="mut">Waktu bermain sekitar 12 menit. Setiap pilihan datang dengan penjelasan.<br>🎵 Ada musik latar. Tombol suara ada di pojok kanan bawah.</p>
  <button class="btn" id="go">Mulai Ekspedisi</button></div>`;
- $("#go").onclick=()=>{lvIntro()};
+ $("#go").onclick=()=>{BGM.start();lvIntro()};
 }
 function lvIntro(){
  hud();const l=L[st.lv];
  M.innerHTML=`<div class="card" style="text-align:center"><div class="big">${l.e}</div><div class="lv">LEVEL ${st.lv+1} DARI 5</div><h2 style="font-size:28px">${l.n}</h2>
- <p class="mut">${["Kasusmu: antrean kantin yang memakan waktu istirahat.","Siapa sebenarnya yang paling merasakan antrean itu?","Saatnya membuktikan bahwa masalah antre kantin benar-benar menyakitkan.","Uji solusi pre-order kantin sebelum membangun apa pun."][st.lv]}</p>
+ <p class="mut">${["Kasusmu: skill siswa SMK yang belum menghasilkan uang.","Siapa klien yang paling butuh dan mau membayar?","Saatnya membuktikan masalah ini benar-benar menyakitkan bagi UMKM.","Uji paket konten manual sebelum membangun platform apa pun."][st.lv]}</p>
  <button class="btn" id="go">Masuk Level</button></div>`;
  $("#go").onclick=()=>{st.qi=0;ques()};
 }
@@ -210,7 +225,7 @@ function lvDone(){
 function gate(){
  hud();
  M.innerHTML=`<div class="card"><div class="lv">🚀 LEVEL 5 · GERBANG PROTOTYPE</div><h2 class="q">Pertarungan terakhir: tunjukkan buktinya</h2>
- <p class="mut">Ini bagian yang jujur. Bayangkan kamu menjalankan proyek kantin tadi di sekolahmu, atau pakai ide bisnismu sendiri kalau sudah punya. Centang hanya yang benar-benar sudah dikerjakan. Gerbang hanya terbuka untuk bukti.</p>
+ <p class="mut">Ini bagian yang jujur. Bayangkan kamu menjalankan proyek jasa konten siswa tadi di sekolahmu, atau pakai ide bisnismu sendiri kalau sudah punya. Centang hanya yang benar-benar sudah dikerjakan. Gerbang hanya terbuka untuk bukti.</p>
  <div id="gl"></div><button class="btn" id="go">Buka Gerbang</button></div>`;
  const gl=$("#gl");
  G.forEach((t,i)=>{const lb=document.createElement("label");lb.className="chk";lb.innerHTML=`<input type="checkbox"><span>${esc(t)}</span>`;
@@ -230,7 +245,7 @@ function result(g){
  let ti=0;T.forEach((t,i)=>{if(st.xp>=t[0])ti=i});const tt=T[ti],nx=T[ti+1];
  const lp=pcts.slice(0,4),wl=lp.indexOf(Math.min(...lp)),bi=pcts.indexOf(Math.max(...pcts));
  const ms=[];
- if(cls==="ok"){ms.push("Tetapkan 3 fitur inti prototype dari keluhan paling sering dan bagian yang paling dihargai pelanggan.","Tentukan satu metrik sukses yang jelas, misalnya 20 pesanan per minggu.","Bangun prototype sederhana dalam 2 sampai 4 minggu, uji ke minimal 5 pengguna, dan catat apa yang mereka lakukan, bukan apa yang mereka katakan.")}
+ if(cls==="ok"){ms.push("Tetapkan 3 fitur inti prototype dari keluhan paling sering dan bagian yang paling dihargai pelanggan.","Tentukan satu metrik sukses yang jelas, misalnya 10 paket konten terjual per bulan.","Bangun prototype sederhana dalam 2 sampai 4 minggu, uji ke minimal 5 pengguna, dan catat apa yang mereka lakukan, bukan apa yang mereka katakan.")}
  else{if(lp[wl]<80)ms.push("<b>"+names[wl]+":</b> "+L[wl].tip);G.forEach((_,i)=>{if(!st.gate[i]&&ms.length<3)ms.push("<b>Bukti:</b> "+GM[i])})}
  const mt=cls==="ok"?"Misi berikutnya: bangun prototype":cls==="mid"?"Misi penutup celah":"Misi kembali ke lapangan";
  const rows=names.map((n,i)=>`<div class="row"><div class="t"><span>${i<4?L[i].e:"🚀"} ${n}</span><span>${pcts[i]}%</span></div><div class="bar"><i style="width:0" data-w="${pcts[i]}%"></i></div></div>`).join("");
@@ -252,9 +267,26 @@ function result(g){
   try{navigator.clipboard.writeText(txt).then(ok,no)}catch(e){no()}};
 }
 const MD={3:["🤩","Mantap! Itu insting founder sejati!"],2:["😎","Lumayan! Dikit lagi sempurna."],1:["🤔","Hmm, masih ada yang lebih tajam nih."],0:["😵","Awas jebakan! Tenang, ini buat belajar."]};
-function mood(p){const i=$("#mi"),b=$("#mb");if(!i)return;i.textContent=MD[p][0];b.textContent=MD[p][1];i.className="mi "+(p>=2?"hop":"wig");if(p===3)confetti(28)}
+function mood(p){const i=$("#mi"),b=$("#mb");if(!i)return;BGM.sfx(p);i.textContent=MD[p][0];b.textContent=MD[p][1];i.className="mi "+(p>=2?"hop":"wig");if(p===3)confetti(28)}
 function confetti(n){if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;const c=["#ff4d8d","#ffe14d","#12c48b","#2d6cff","#8a4dff"];for(let i=0;i<n;i++){const e=document.createElement("i");e.className="cf";e.style.cssText=`left:${Math.random()*100}vw;background:${c[i%5]};animation-duration:${1.6+Math.random()*1.6}s;animation-delay:${Math.random()*.4}s`;document.body.appendChild(e);setTimeout(()=>e.remove(),3800)}}
+const BGM={ctx:null,on:true,t:0,step:0,timer:null,
+M:[[72,76,79,76,72,76,79,84],[69,72,76,72,69,72,76,81],[72,77,81,77,72,77,81,84],[71,74,79,74,71,74,79,83]],B:[48,45,41,43],
+hz:m=>440*Math.pow(2,(m-69)/12),
+start(){if(!this.on)return;if(!this.ctx){const C=window.AudioContext||window.webkitAudioContext;if(!C)return;this.ctx=new C();this.g=this.ctx.createGain();this.g.gain.value=.07;this.g.connect(this.ctx.destination)}
+ if(this.ctx.state==="suspended")this.ctx.resume();if(!this.timer){this.t=this.ctx.currentTime+.05;this.timer=setInterval(()=>this.sched(),100)}},
+stop(){clearInterval(this.timer);this.timer=null;if(this.ctx)this.ctx.suspend()},
+note(m,t,d,ty,v){const o=this.ctx.createOscillator(),g=this.ctx.createGain();o.type=ty;o.frequency.value=this.hz(m);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+.01);g.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(g);g.connect(this.g);o.start(t);o.stop(t+d+.05)},
+sched(){const sp=60/132/2;while(this.t<this.ctx.currentTime+.3){const bar=Math.floor(this.step/8)%4,i=this.step%8;this.note(this.M[bar][i],this.t,sp*.9,"square",.5);if(i%4===0)this.note(this.B[bar],this.t,sp*3.2,"triangle",1.3);if(i%2===1)this.note(this.M[bar][i]-12,this.t,sp*.4,"triangle",.35);this.t+=sp;this.step++}},
+sfx(p){if(!this.on||!this.ctx||this.ctx.state!=="running")return;const t=this.ctx.currentTime+.02;
+ if(p===3){this.note(79,t,.12,"square",1.2);this.note(84,t+.1,.12,"square",1.2);this.note(91,t+.2,.25,"square",1.2)}
+ else if(p===2)this.note(76,t,.2,"square",1.1);
+ else{this.note(55,t,.15,"sawtooth",1);this.note(50,t+.14,.25,"sawtooth",1)}}};
+(function(){const b=document.createElement("button");b.id="snd";b.className="snd";b.setAttribute("aria-label","Nyalakan atau matikan musik");b.textContent="🔊";document.body.appendChild(b);
+ b.onclick=()=>{BGM.on=!BGM.on;b.textContent=BGM.on?"🔊":"🔇";BGM.on?BGM.start():BGM.stop()};
+ document.addEventListener("visibilitychange",()=>{if(!BGM.ctx)return;document.hidden?BGM.ctx.suspend():BGM.on&&BGM.ctx.resume()})})();
 intro();
 </script>
 </body>
 </html>
+
+</body></html>
