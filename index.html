@@ -76,6 +76,37 @@ h1{font-size:34px;text-shadow:3px 3px 0 var(--pink)}
 @keyframes wig{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
 @keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.node{width:38px;height:38px;font-size:18px;border-radius:12px}
+@media (max-width:380px){.node{width:32px;height:32px;font-size:15px;border-radius:10px}}
+.card+.card{margin-top:24px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 14px}
+.chip2{display:inline-block;background:var(--fld);border:3px solid var(--bd);border-radius:999px;padding:2px 12px;font:700 15px "Fredoka",system-ui,sans-serif;box-shadow:2px 2px 0 var(--sh)}
+.gets{margin:6px 0 14px;padding-left:20px}.gets li{margin:6px 0}
+.gh{font:700 18px "Fredoka",system-ui,sans-serif;margin:18px 0 8px}
+.sh{font-size:24px;margin:0 0 6px}
+.sub{color:var(--mut);margin:0 0 14px;font-size:15px}
+.dc{border:3px solid var(--bd);border-radius:18px;padding:14px 16px;margin:16px 0;box-shadow:4px 4px 0 var(--sh);background:var(--fld)}
+.dc.sK{background:var(--ok)}.dc.sT{background:var(--mid)}.dc.sV{background:var(--bad)}
+.dh{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:6px 10px}
+.dh .de{font-size:26px}.dh h3{font-size:21px}
+.dh .badge{grid-column:1/-1;justify-self:start}
+.badge{background:var(--sf);border:3px solid var(--bd);border-radius:999px;padding:1px 10px;font:700 13px "Fredoka",system-ui,sans-serif}
+.ask{margin:6px 0 0;font-size:14px;color:var(--mut);font-style:italic}
+.mt{margin:10px 0 4px}
+.mr{display:grid;grid-template-columns:96px 1fr 42px;align-items:center;gap:8px;font-size:14px;font-weight:700;margin:6px 0}
+.mr .bar{height:14px}.mr b{text-align:right}
+.dots{letter-spacing:6px;font-size:16px}
+.mod{margin:8px 0 0;font-size:15px;font-weight:600}
+.chkl{list-style:none;margin:10px 0 0;padding:10px 0 0;border-top:2px dashed var(--bd);font-size:15px}
+.chkl li{margin:5px 0;display:flex;gap:8px;align-items:flex-start}
+.bmc{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+.bb{border:3px solid var(--bd);border-radius:12px;padding:8px;font:700 13px/1.25 "Fredoka",system-ui,sans-serif;display:flex;flex-direction:column;gap:4px;min-height:66px;box-shadow:2px 2px 0 var(--sh)}
+.bb.sK{background:var(--ok)}.bb.sT{background:var(--mid)}.bb.sV{background:var(--bad)}
+.ac{display:flex;flex-direction:column;gap:8px;align-items:flex-start;border:3px solid var(--bd);border-radius:16px;padding:12px 14px;margin:12px 0;background:var(--fld);box-shadow:4px 4px 0 var(--sh)}
+.ac .w{background:var(--vio);color:#fff;border:2px solid var(--bd);border-radius:999px;padding:1px 10px;font:700 13px "Fredoka",system-ui,sans-serif}
+textarea.ta{width:100%;min-height:200px;font:14px/1.5 system-ui,sans-serif;padding:12px;border:3px solid var(--bd);border-radius:14px;background:var(--fld);color:var(--ink);margin-top:10px}
+.wrap{padding-bottom:84px}
+@media (max-width:420px){.snd{width:44px;height:44px;font-size:20px;right:10px;border-radius:14px}}
 </style>
 </head>
 <body>
@@ -85,7 +116,7 @@ h1{font-size:34px;text-shadow:3px 3px 0 var(--pink)}
 </div>
 <script>
 const L=[
-{n:"Temukan Masalah",e:"🔍",tip:"Data 15 temanmu yang punya skill kreatif: apakah pernah dapat klien berbayar, berapa kali, dan apa kendalanya. Lalu tulis masalahnya dalam satu kalimat: siapa yang terdampak, apa yang terjadi, dan berapa banyak.",
+{n:"Temukan Masalah",e:"🔍",dm:0,intro:"Kasusmu: skill siswa SMK yang belum menghasilkan uang. Pastikan masalahnya benar-benar terjadi.",
 q:[
 {t:"Banyak temanmu jago desain dan edit video, tapi hampir tidak ada yang pernah dapat klien. Langkah pertama untuk memastikan ini masalah nyata?",o:[
 ["Langsung membuat website marketplace jasa siswa SMK.",0,"Itu melompat ke solusi. Pastikan dulu masalahnya nyata dan sering terjadi."],
@@ -102,7 +133,7 @@ q:[
 ["Yang paling sering dan paling menghambat, dicek dengan data pendataan dan wawancara.",3,"Tepat. Prioritas berdasar frekuensi dan dampak."],
 ["Yang solusinya paling gampang dibuat.",1,"Mudah belum tentu penting. Bisa jadi kamu menyelesaikan masalah kecil."],
 ["Yang paling ramai dibahas di grup chat angkatan.",2,"Ramai bisa jadi sinyal, tapi belum tentu paling sering atau paling merugikan. Cek dengan data."]]}]},
-{n:"Kenali Pelanggan",e:"🎯",tip:"Daftar 10 UMKM di sekitar sekolah yang media sosialnya jarang diperbarui dan 5 siswa kreator. Tulis ciri perilaku mereka, bukan hanya usia atau jurusan, lalu jadwalkan wawancara 15 menit untuk masing-masing.",
+{n:"Kenali Pelanggan",e:"🎯",dm:1,intro:"Siapa klien yang paling butuh dan mau membayar? Target yang tepat menentukan semua langkah berikutnya.",
 q:[
 {t:"Siapa target pelanggan berbayar pertamamu?",o:[
 ["Semua bisnis di kota.",0,"Terlalu luas. Kebutuhan tiap bisnis berbeda."],
@@ -119,7 +150,7 @@ q:[
 ["Wawancarai juga siswa kreator tentang waktu, kualitas kerja, dan kesiapan mereka terikat tenggat dari klien.",3,"Tepat. Bisnis dua sisi perlu memahami kedua pihak."],
 ["Tanya mereka, 'ideku bagus tidak?'",2,"Cukup, tapi itu meminta opini. Gali kemampuan dan kendalanya."],
 ["Tunggu sampai ada klien, baru bicara dengan mereka.",1,"Kamu bisa kehabisan tenaga kerja saat klien datang. Libatkan sejak awal."]]}]},
-{n:"Validasi Masalah",e:"🧪",tip:"Tulis ulang pertanyaan wawancaramu menjadi pertanyaan cerita masa lalu. Wawancarai 15 pemilik UMKM, tandai jawaban berisi tindakan nyata (menyewa admin, membayar desain, mencoba sendiri), dan abaikan pujian.",
+{n:"Validasi Masalah",e:"🧪",dm:0,intro:"Saatnya membuktikan masalah ini cukup kuat sampai orang mau mengeluarkan uang atau usaha.",
 q:[
 {t:"Pertanyaan wawancara mana yang paling kuat untuk pemilik UMKM?",o:[
 ["Kalau ada jasa konten dari siswa SMK, kamu mau pakai?",0,"Pertanyaan hipotetis. Jawaban sopan bukan fakta."],
@@ -136,7 +167,7 @@ q:[
 ["Hargai, tapi catat sebagai opini. Cari bukti dari calon pelanggan yang mau bertindak.",3,"Tepat. Kamu memisahkan semangat dari bukti."],
 ["Abaikan dia sepenuhnya.",1,"Terlalu keras. Hargai dukungannya, tapi jangan jadikan data."],
 ["Ajak dia jadi kreator pertama dan lihat apakah dia benar-benar mengerjakan.",2,"Cara bagus menguji komitmen, tapi tetap cari bukti dari pelanggan sebenarnya, bukan hanya temanmu."]]}]},
-{n:"Validasi Solusi",e:"🛠️",tip:"Tawarkan paket konten manual lewat WhatsApp selama 2 minggu dan kerjakan dengan tim kecil siswa. Targetkan minimal 3 UMKM yang benar-benar membayar, lalu catat alasan yang tidak jadi memesan.",
+{n:"Validasi Solusi",e:"🛠️",dm:2,intro:"Uji paket konten manual sebelum membangun platform apa pun. Apakah solusinya benar menjawab kebutuhan?",
 q:[
 {t:"Sebelum membuat platform, apa cara termurah menguji solusi jasa konten siswa?",o:[
 ["Membangun website marketplace lengkap dulu supaya meyakinkan.",0,"Mahal dan berisiko. Kamu belum tahu ada yang mau."],
@@ -148,55 +179,156 @@ q:[
 ["5 pembayar adalah sinyal nyata. Tanyakan alasan 5 pembayar dan 25 lainnya, lalu perbaiki.",3,"Tepat. Fokus pada komitmen dan belajar dari penolakan."],
 ["Gagal, ganti ide.",1,"Terlalu cepat menyerah. Lima pembayar adalah titik awal belajar."],
 ["Turunkan harga sampai semua yang tertarik mau membayar.",1,"Diskon menutupi sinyal. Cari tahu dulu apa yang membuat mereka enggan."]]},
+{t:"Lima UMKM sudah membayar paket konten pertama. Seminggu kemudian hanya 1 yang memesan lagi. Yang lain bilang, 'Kontennya bagus kok.' Bagaimana kamu membacanya?",o:[
+["Solusinya sudah tepat, karena semua pelanggan memuji hasilnya.",0,"Pujian bukan bukti solusi menjawab kebutuhan. Perilaku mereka justru berkata lain: 4 dari 5 tidak kembali."],
+["Mewawancarai kelimanya: apa yang mereka harapkan, apa dampak konten untuk penjualan mereka, dan kenapa tidak lanjut. Solusi dianggap tepat kalau hasilnya terasa dan mereka mau mengulang.",3,"Tepat. Solusi menjawab kebutuhan kalau hasilnya terasa bagi pelanggan dan mereka kembali, bukan sekadar puas."],
+["Mengirim diskon 20% supaya mereka memesan lagi.",1,"Diskon bisa menutupi masalah yang sebenarnya. Cari tahu dulu kenapa mereka tidak lanjut."],
+["Membandingkan dengan 1 UMKM yang memesan lagi: apa yang membedakan dia dari yang lain?",2,"Langkah bagus untuk menemukan pola, tapi kamu tetap perlu mendengar alasan dari 4 pelanggan yang tidak lanjut."]]}]},
+{n:"Rumuskan Value",e:"💎",dm:3,intro:"Bisakah UMKM paham untungnya dalam 30 detik? Value yang jelas membuat orang punya alasan membayar.",
+q:[
+{t:"Pemilik kafe bertanya, 'Kenapa saya harus pakai kalian, bukan freelancer biasa atau bikin konten sendiri?' Jawaban mana yang paling kuat?",o:[
+["Kami kreatif, kekinian, dan profesional.",0,"Kata sifat yang bisa diklaim siapa saja. Pelanggan butuh hasil yang bisa mereka bayangkan."],
+["Kami bantu kafemu punya 12 konten siap posting tiap bulan, selesai 3 hari kerja setelah brief, revisi 1 kali gratis, tanpa kamu repot mengurus.",3,"Tepat. Ada hasil yang jelas, batas waktu, dan beban yang hilang dari pelanggan. Value seperti ini bisa diuji."],
+["Kami masih belajar, jadi harganya jauh lebih murah dari freelancer.",1,"Murah bukan nilai yang kuat dan mudah dikalahkan. Pelanggan perlu tahu apa yang mereka dapat, bukan hanya berapa yang mereka bayar."],
+["Kami siswa SMK berprestasi dan didukung sekolah.",2,"Kredibilitas membantu membangun kepercayaan, tapi belum menjelaskan hasil apa yang didapat pelanggan."]]},
+{t:"Dari 12 wawancara: 9 UMKM mengeluh tidak sempat membuat konten, 5 bingung konten apa yang laku, 2 takut hasilnya jelek. Bagaimana menyusun value proposition?",o:[
+["Menyebut semua layanan sekaligus: desain, video, caption, jadwal posting, analitik, dan iklan.",0,"Daftar fitur membuat pesanmu kabur. Value yang kuat menjawab keluhan terbesar dengan jelas."],
+["Memulai dari keluhan terbanyak (tidak sempat) dan menjanjikan hasil terukur untuk itu, lalu menguji apakah itu cukup membuat mereka membayar.",3,"Tepat. Value disusun dari data keluhan, diprioritaskan, dan bisa diuji."],
+["Menyusun 3 paket berbeda lalu melihat mana yang paling sering dipilih UMKM.",2,"Teknik uji yang bagus, tapi tanpa memprioritaskan keluhan lebih dulu, paketmu bisa menjawab hal yang kurang penting."],
+["Menawarkan yang paling kami kuasai, yaitu desain, apa pun keluhan mereka.",1,"Itu berpusat pada kemampuanmu, bukan pada kebutuhan mereka."]]},
+{t:"Kamu menjelaskan idemu ke 10 UMKM dalam 30 detik. Bagaimana kamu tahu value-mu sudah jelas?",o:[
+["Bertanya, 'Paham kan?' lalu menghitung berapa yang menjawab iya.",0,"Orang cenderung menjawab iya supaya sopan. Itu bukan ukuran paham."],
+["Meminta mereka menjelaskan ulang dengan kata sendiri, lalu melihat apakah mereka menyebut manfaat yang benar dan menanyakan cara memesan.",3,"Tepat. Penjelasan ulang dan pertanyaan lanjutan menunjukkan mereka benar-benar menangkap nilainya."],
+["Menunjukkan contoh hasil karya lalu meminta komentar mereka.",2,"Contoh membantu, tapi komentar soal tampilan belum menunjukkan mereka paham manfaatnya untuk usaha mereka."],
+["Melihat apakah mereka mengangguk dan tersenyum saat dijelaskan.",1,"Bahasa tubuh yang sopan bukan bukti. Uji dengan penjelasan ulang atau tindakan nyata."]]}]},
+{n:"Susun Model Bisnis",e:"💰",dm:4,intro:"Dari mana uangnya datang, dan apakah masih ada sisa untung setelah semua biaya?",
+q:[
+{t:"Kamu perlu menentukan harga paket konten bulanan. Cara paling masuk akal untuk memulai?",o:[
+["Memasang harga paling murah di antara semua freelancer supaya pasti laku.",1,"Perang harga mengikis margin, apalagi tenagamu terbatas. Murah bukan keunggulan yang bertahan."],
+["Menghitung biaya (upah kreator, waktu, kuota, revisi) dan margin yang diinginkan, lalu menguji harganya lewat penawaran nyata ke 5 UMKM.",3,"Tepat. Harga berangkat dari biaya dan diuji dengan penawaran, bukan ditebak."],
+["Gratis dulu supaya banyak yang mencoba, urusan uang dipikirkan nanti.",0,"Tanpa harga, kamu tidak tahu apakah ada yang mau membayar. Itu bukti yang paling penting."],
+["Bertanya ke UMKM, 'Kalau ada jasa ini, kamu mau bayar berapa?'",2,"Cukup berguna sebagai petunjuk awal, tapi jawaban hipotetis sering terlalu rendah atau terlalu manis. Uji dengan penawaran sungguhan."]]},
+{t:"Satu paket dijual Rp300.000. Upah kreator Rp150.000, kuota dan aplikasi Rp30.000, dan kamu menghabiskan 5 jam mengurus brief serta revisi. Bagaimana menilai model ini sehat atau tidak?",o:[
+["Untung Rp120.000 per paket, jadi model ini sudah sehat.",1,"Kamu belum menghitung 5 jam waktumu dan biaya tak terlihat seperti revisi ulang."],
+["Menghitung untung bersih per paket termasuk nilai waktumu, lalu menghitung berapa paket per bulan yang dibutuhkan supaya layak dijalankan.",3,"Tepat. Margin yang sehat dihitung per unit dengan semua biaya, lalu dicek volume minimalnya."],
+["Fokus menaikkan jumlah pesanan dulu, soal margin dipikirkan belakangan.",0,"Menambah skala dengan margin yang bocor justru memperbesar kerugian."],
+["Menyamakan harga dengan paket pesaing lalu berharap biayanya bisa ditekan.",1,"Menyamakan harga tanpa menghitung biaya sendiri adalah tebakan."]]},
+{t:"UMKM sudah membayar. Tapi teman-teman kreator yang mengerjakan belum dijanjikan apa-apa dan mulai kendor. Bagaimana mengaturnya?",o:[
+["Biarkan saja, mereka kan teman dan pasti mau membantu.",0,"Komitmen tanpa imbalan yang jelas mudah luntur. Pesanan pertama sudah memberi tanda bahaya."],
+["Menyepakati pembagian hasil yang jelas dan tertulis sejak pesanan pertama, supaya kualitas dan komitmen kreator terjaga.",3,"Tepat. Mitra utama yang memegang pekerjaan inti perlu imbalan yang jelas dan adil."],
+["Memberi imbalan portofolio dan sertifikat dulu, bayaran dibahas setelah model terbukti.",2,"Bisa untuk uji awal, tapi harus ada batas waktu dan kesepakatan supaya tidak jadi janji kosong."],
+["Membayar mereka lebih besar dari yang kamu terima supaya tetap semangat.",1,"Itu mengorbankan modelmu sendiri. Imbalan harus berasal dari margin yang sehat."]]}]},
+{n:"Arah Prototype",e:"🚀",dm:5,intro:"Prototype awal sudah ada. Fitur apa yang dipertahankan, bagaimana mengujinya, dan ke mana arah berikutnya?",
+q:[
 {t:"Pesanan berjalan, tapi kamu kewalahan mengatur jadwal kreator dan revisi klien lewat chat. Apa tindakanmu?",o:[
 ["Langsung membuat platform canggih untuk mengotomatisasi semuanya.",0,"Terlalu dini. Otomatisasi sebelum pola terbukti membuang tenaga."],
 ["Mencatat bagian yang paling merepotkan dan yang paling dihargai klien, lalu memilih 3 fitur inti untuk prototype.",3,"Tepat. Prototype lahir dari pola nyata, bukan tebakan."],
 ["Menghentikan layanan sampai sistemnya siap.",1,"Kamu kehilangan momentum dan pembelajaran dari pelanggan."],
-["Minta teman yang jago coding membuat platformnya supaya cepat selesai.",1,"Cepat, tapi kamu membangun sebelum tahu fitur mana yang benar-benar dibutuhkan."]]}]}
+["Minta teman yang jago coding membuat platformnya supaya cepat selesai.",1,"Cepat, tapi kamu membangun sebelum tahu fitur mana yang benar-benar dibutuhkan."]]},
+{t:"Prototype versi 1 sudah jadi: halaman pesan paket dan papan status pesanan. Bagaimana mengujinya?",o:[
+["Meminta 5 UMKM mencoba, lalu menanyakan pendapat mereka sesudahnya.",2,"Lebih baik daripada tidak diuji, tapi pendapat sesudah mencoba sering berbeda dengan apa yang sebenarnya dilakukan. Amati perilakunya."],
+["Memberi 5 UMKM tugas nyata, misalnya memesan satu paket, lalu mengamati tanpa membantu: di mana mereka bingung, berapa lama, dan apakah berhasil.",3,"Tepat. Uji prototype dengan tugas nyata dan amati perilaku, bukan hanya komentar."],
+["Menunjukkan ke teman sekelas dan guru lalu meminta nilai 1 sampai 10.",1,"Mereka bukan pengguna sebenarnya, dan nilai angka tidak menunjukkan di mana masalah penggunaannya."],
+["Menunggu semua fitur lengkap baru diuji supaya tampil meyakinkan.",0,"Terlambat dan mahal. Prototype awal sengaja diuji sebelum sempurna."]]},
+{t:"Hasil uji: 4 dari 5 UMKM berhasil memesan, tapi semuanya bingung saat memilih paket, dan 3 orang tidak pernah membuka papan status pesanan. Ke mana prototype dikembangkan?",o:[
+["Menambah fitur baru supaya papan status terlihat lebih menarik.",0,"Menambah fitur pada hal yang tidak dipakai menjauhkanmu dari kebutuhan pengguna."],
+["Menyederhanakan langkah memilih paket karena masalahnya terlihat dari perilaku. Papan status dipertahankan hanya jika terbukti dibutuhkan, lalu ukur ulang di uji berikutnya.",3,"Tepat. Perbaiki hambatan yang terbukti, tunda yang tidak dipakai, lalu ukur ulang."],
+["Melatih UMKM supaya terbiasa memakai prototype sesuai desainnya.",1,"Kalau pengguna harus dilatih dulu, desainnya yang perlu diperbaiki lebih dulu."],
+["Mengganti seluruh konsep karena ada yang bingung.",1,"Terlalu drastis. 4 dari 5 berhasil memesan, itu sinyal bahwa arah dasarnya benar."]]}]}
+
 ];
-const GM=[
-"Wawancarai sampai 15 calon pengguna yang sesuai segmen, dan tetapkan target jumlah wawancara per minggu.",
-"Tulis masalahmu dalam satu kalimat: siapa yang terdampak, apa yang terjadi, dan berapa waktu atau uang yang terbuang.",
-"Kumpulkan 3 komitmen nyata dari calon pengguna: pre-order berbayar, uang muka, atau surat minat tertulis.",
-"Rekap semua wawancara dalam satu tabel, lalu tandai pola keluhan yang muncul di minimal 5 orang.",
-"Jalankan uji manual atau landing page selama 1 minggu sebelum membangun produk sungguhan.",
-"Pilih 3 fitur inti dengan menandai keluhan paling sering dan bagian yang paling dihargai pelanggan."];
-const G=[
-"Sudah mewawancarai minimal 15 calon pengguna yang sesuai segmen.",
-"Bisa menyebut masalah dalam satu kalimat lengkap dengan kerugian yang terukur.",
-"Minimal 3 orang menunjukkan komitmen nyata (bayar, pre-order, atau surat minat).",
-"Pola keluhan yang sama muncul di minimal 5 wawancara.",
-"Sudah menguji solusi versi manual atau landing page tanpa membangun produk penuh.",
-"Bisa menyebut 3 fitur inti (bukan 10) yang wajib ada di prototype."];
-const st={lv:0,qi:0,xp:0,combo:0,best:0,sc:[0,0,0,0],gate:[],idea:"",done:false,ans:false};
+const D=[
+{n:"Masalah",e:"🔍",ask:"Apakah masalahnya benar terjadi dan cukup kuat?",bmc:"Segmen Pelanggan dan Proposisi Nilai",
+K:"Masalahmu terbukti nyata dan cukup menyakitkan: ada cerita nyata, dan pelanggan sudah mengeluarkan usaha atau biaya untuk mengatasinya. Pertahankan dengan merekap pola keluhan supaya mudah dipaparkan.",
+T:"Masalahmu mulai terlihat, tapi buktinya belum utuh. Pastikan ini bukan sekadar keluhan: cari tahu apa yang sudah dilakukan dan dikeluarkan orang untuk mengatasinya, dari lebih banyak orang.",
+V:"Masalahmu masih berupa dugaan. Selama belum ada cerita nyata dari banyak calon pelanggan, semua yang dibangun di atasnya berisiko.",
+bt:"Masalah tidak punya kotak sendiri di BMC, tapi menopang Segmen Pelanggan dan Proposisi Nilai. Kalau buktinya tipis, dua kotak itu masih tebakan."},
+{n:"Pelanggan",e:"🎯",ask:"Apakah target pelanggannya sudah tepat?",bmc:"Segmen Pelanggan dan Saluran",
+K:"Targetmu sempit dan terjangkau, dan yang kamu uji memang orang yang tepat. Ini dasar yang kuat untuk memilih saluran dan pesan.",
+T:"Segmenmu mulai jelas, tapi masih ada celah. Cek apakah sudah cukup sempit, dan apakah yang kamu uji benar-benar pengguna sekaligus pembeli, bukan teman dekat.",
+V:"Targetmu masih terlalu luas atau belum diuji ke orang yang tepat. Sempitkan sampai kamu bisa menyebut siapa mereka dan di mana mereka berkumpul.",
+bt:"Persempit Segmen Pelanggan menjadi satu kelompok dengan perilaku yang sama, lalu isi Saluran dengan tempat nyata untuk menemui mereka."},
+{n:"Solusi",e:"🛠️",ask:"Apakah solusinya benar menjawab kebutuhan?",bmc:"Proposisi Nilai, Saluran, dan Hubungan Pelanggan",
+K:"Solusimu sudah diuji dengan cara murah dan ada orang yang berkomitmen nyata. Ini sinyal paling kuat bahwa solusimu menjawab kebutuhan.",
+T:"Sudah ada uji atau minat awal, tapi komitmen nyatanya belum cukup. Minat tanpa pembayaran belum membuktikan solusimu menjawab kebutuhan.",
+V:"Solusimu belum diuji ke pelanggan. Ada risiko kamu membangun sesuatu yang tidak ada yang mau pakai atau bayar.",
+bt:"Cek Proposisi Nilai, Saluran, dan Hubungan Pelanggan: apakah solusimu terbukti menjawab kebutuhan, dan apakah pelanggan mau kembali memakainya?"},
+{n:"Value",e:"💎",ask:"Apakah value yang ditawarkan sudah jelas?",bmc:"Proposisi Nilai",
+K:"Value-mu jelas dan dipahami calon pelanggan dengan kata-kata mereka sendiri. Ini bahan bagus untuk pitch dan Proposisi Nilai di BMC.",
+T:"Value-mu mulai terbentuk, tapi belum teruji. Bisa jadi kamu sudah paham, sementara pelanggan belum. Uji penjelasanmu ke orang baru.",
+V:"Value-mu belum jelas atau belum diuji. Kalau calon pelanggan tidak bisa menyebut untungnya, mereka tidak punya alasan untuk membayar.",
+bt:"Tulis ulang Proposisi Nilai menjadi satu kalimat berisi hasil yang terukur, dan buang klaim yang tidak bisa kamu buktikan."},
+{n:"Model Bisnis",e:"💰",ask:"Seperti apa model bisnisnya, dan apakah masih untung?",bmc:"Arus Pendapatan, Struktur Biaya, dan Mitra Utama",
+K:"Model bisnismu sudah berangkat dari angka: biaya, harga, dan margin dihitung, dan ada pelanggan yang setuju dengan harganya.",
+T:"Ada hitungan awal, tapi belum utuh. Cek lagi margin dengan semua biaya (waktu, revisi) dan pastikan harga diuji lewat penawaran nyata.",
+V:"Model bisnismu masih berupa rencana. Tanpa hitungan biaya dan uji harga, kamu belum tahu apakah usaha ini bisa hidup.",
+bt:"Isi Arus Pendapatan dan Struktur Biaya dengan angka dari uji nyata, lalu cek Mitra Utama: siapa yang harus kamu bayar atau libatkan agar layanan berjalan."},
+{n:"Prototype",e:"🚀",ask:"Ke arah mana prototype dikembangkan?",bmc:"Aktivitas Utama dan Sumber Daya Utama",
+K:"Prototype awalmu fokus pada fitur inti dan sudah diuji ke pengguna nyata. Lanjutkan dengan putaran uji berikutnya dan satu metrik yang jelas.",
+T:"Prototype sudah ada, tapi arahnya belum terkunci. Pastikan fiturnya dipilih dari temuan lapangan dan diuji lewat perilaku pengguna.",
+V:"Prototype belum punya arah yang jelas. Pilih maksimal 3 fitur inti dari temuan lapangan, lalu uji ke pengguna sungguhan.",
+bt:"Samakan Aktivitas Utama dan Sumber Daya Utama dengan 3 fitur inti prototype. Fitur lainnya ditunda sampai hasil uji terbaca."}
+];
+const ITEMS=[
+{d:0,c:"Kami sudah mewawancarai minimal 15 calon pelanggan dan mencatat cerita nyata mereka, bukan hanya opini.",a:"Masalah terbukti terjadi pada banyak orang",t:"Wawancarai sampai 15 calon pelanggan dengan pertanyaan cerita masa lalu, lalu rekap jawabannya dalam satu tabel."},
+{d:0,c:"Kami punya bukti masalahnya cukup kuat: calon pelanggan sudah mengeluarkan uang, waktu, atau usaha untuk mengatasinya.",a:"Masalah cukup kuat sampai orang mengeluarkan uang atau usaha",t:"Catat dari tiap wawancara cara dan biaya yang sudah mereka keluarkan, lalu tandai pola yang muncul di minimal 5 orang."},
+{d:1,c:"Segmen pelanggan kami sempit dan jelas: kami bisa menyebut siapa mereka, di mana mereka berkumpul, dan cara menemuinya.",a:"Segmen pelanggan sempit dan terjangkau",t:"Tulis profil segmen berdasarkan perilaku (bukan hanya usia atau jurusan), lalu daftar 20 nama atau tempat nyata yang bisa kamu datangi."},
+{d:1,c:"Yang kami wawancarai dan uji benar-benar pengguna sekaligus pembeli dari segmen itu, bukan teman dekat atau keluarga.",a:"Yang diuji adalah pengguna dan pembeli yang tepat",t:"Cari 10 responden baru di luar lingkar pertemananmu, lalu ulangi uji singkat dengan pertanyaan yang sama."},
+{d:2,c:"Kami sudah menguji solusi dengan cara murah (manual, landing page, atau pre-order) sebelum membangun penuh.",a:"Solusi sudah diuji dengan cara murah",t:"Jalankan uji manual 1 sampai 2 minggu tanpa membangun produk penuh, dan tetapkan target 3 komitmen nyata."},
+{d:2,c:"Minimal 3 calon pelanggan menunjukkan komitmen nyata: bayar, uang muka, pre-order, atau surat minat tertulis.",a:"Ada komitmen nyata dari calon pelanggan",t:"Tawarkan pre-order atau uang muka ke 10 calon pelanggan, catat siapa yang berkomitmen, dan tanyakan alasan yang menolak."},
+{d:3,c:"Kami bisa menyatakan value dalam satu kalimat: untuk siapa, masalah apa, hasil apa yang didapat, dan apa bedanya.",a:"Value bisa dirumuskan dalam satu kalimat yang terukur",t:"Tulis ulang Proposisi Nilai menjadi satu kalimat yang memuat hasil terukur, lalu simpan sebagai versi pegangan kelompok."},
+{d:3,c:"Calon pelanggan bisa menjelaskan ulang value kami dengan benar tanpa kami bantu, dan menyebut manfaat yang sama dengan klaim kami.",a:"Calon pelanggan memahami value yang sama dengan klaimmu",t:"Jalankan uji penjelasan 30 detik ke 5 orang baru, catat kata-kata mereka, lalu perbaiki Proposisi Nilai di BMC."},
+{d:4,c:"Kami sudah menghitung biaya per unit dan harga jual, jadi tahu margin per transaksi termasuk waktu dan biaya tersembunyi.",a:"Biaya per unit dan margin sudah dihitung",t:"Hitung biaya per pesanan (bahan, upah, waktu, revisi), tetapkan harga dan margin, lalu cek berapa transaksi per bulan agar layak."},
+{d:4,c:"Ada calon pelanggan yang sudah menyetujui atau membayar sesuai harga yang kami tetapkan, dan sumber pendapatan kami jelas.",a:"Harga sudah diuji dan ada yang menyetujui",t:"Uji harga lewat penawaran nyata, bukan pertanyaan 'mau bayar berapa', lalu perbarui Arus Pendapatan di BMC dengan hasilnya."},
+{d:5,c:"Kami punya prototype awal yang bisa dicoba, dan sudah memilih maksimal 3 fitur inti berdasarkan temuan wawancara atau uji.",a:"Fitur inti prototype dipilih dari temuan lapangan",t:"Pilih 3 fitur inti dari keluhan paling sering dan bagian yang paling dihargai pelanggan, lalu coret fitur lain dari versi 1."},
+{d:5,c:"Prototype sudah diuji ke minimal 5 calon pengguna sungguhan, dan kami mencatat apa yang mereka lakukan, bukan hanya komentar mereka.",a:"Prototype sudah diuji ke pengguna nyata",t:"Uji prototype ke 5 pengguna dengan tugas nyata, amati tanpa membantu, catat titik bingung dan waktu penyelesaian, lalu tetapkan satu metrik sukses."}
+];
+const EXTRA=[
+"Rangkum semua bukti (rekap wawancara, bukti komitmen, hasil uji prototype) dalam satu halaman sebagai bekal tahap pengembangan dan seleksi November.",
+"Uji prototype putaran kedua ke 10 pengguna baru dengan satu metrik sukses yang jelas, lalu bandingkan dengan putaran pertama.",
+"Perbarui BMC lengkap dengan angka nyata dari uji (jumlah pelanggan, harga, biaya) dan tandai asumsi yang masih tersisa."
+];
+const BM=[["Segmen Pelanggan",[1,0]],["Proposisi Nilai",[3,2]],["Saluran",[1,2]],["Hubungan Pelanggan",[2]],["Arus Pendapatan",[4]],["Sumber Daya Utama",[5,4]],["Aktivitas Utama",[5]],["Mitra Utama",[4]],["Struktur Biaya",[4]]];
+const TH=[0,450,580,720,850,1250];
+const MX=[18,9,9,9,9,9];
+const SLP={K:"Kuat",T:"Perlu dipertajam",V:"Perlu validasi"},SLE={K:"💪",T:"✏️",V:"🔎"},IC={K:"🟢",T:"🟡",V:"🔴"},RK={K:0,T:1,V:2};
+const WK=["Minggu ini","Minggu ini","Minggu depan","Minggu depan","Sebelum seleksi November"];
+const st={lv:0,qi:0,xp:0,combo:0,best:0,sc:[0,0,0,0,0,0,0],gate:[],name:"",done:false,ans:false};
 const $=s=>document.querySelector(s),M=$("#main");
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const toTop=()=>{try{window.scrollTo(0,0)}catch(e){}};
 function hud(){
  let h='<div class="path">';
- for(let i=0;i<5;i++){h+=`<div class="node ${i<st.lv?'done':''} ${i===st.lv&&!st.done?'on':''}" title="${i<4?L[i].n:'Gerbang Prototype'}">${i<4?L[i].e:'🚀'}</div>`;if(i<4)h+=`<div class="seg ${i<st.lv?'done':''}"></div>`}
+ for(let i=0;i<L.length;i++){const dn=i<st.lv||st.done;h+=`<div class="node ${dn?'done':''} ${i===st.lv&&!st.done?'on':''}" title="${L[i].n}">${L[i].e}</div>`;if(i<L.length-1)h+=`<div class="seg ${dn?'done':''}"></div>`}
  h+=`</div><div class="stats"><span class="chip xp">⭐ ${st.xp} XP</span><span class="chip combo">🔥 Kombo x${st.combo}</span></div>`;
  $("#hud").innerHTML=h;
 }
 function intro(){
- hud();
+ hud();toTop();
  M.innerHTML=`<div class="card"><div class="hero">🚀<span>💡</span><span>🧪</span><span>⭐</span></div><h1>Founder Quest</h1>
- <p class="disp" style="font-size:19px;color:var(--lag);margin:6px 0 12px">Dari masalah sampai siap prototype</p>
- <div class="mis" style="margin-top:0"><b>📍 Studi kasus:</b> Kamu siswa SMK. Banyak temanmu jago desain dan edit video, tapi hampir tidak ada yang pernah dapat klien. Di sisi lain, warung, kafe, dan toko di sekitar sekolah butuh konten TikTok dan Instagram tapi bingung mencari siapa yang mengerjakan. Dari celah inilah perjalananmu sebagai founder dimulai, dari menemukan masalah sampai membuktikan solusinya layak dibuatkan prototype.</div><p>Ada 4 level dengan 3 situasi di tiap level, lalu 1 gerbang akhir. Pilih langkah yang paling tepat. Jawaban terbaik memberi XP penuh, dan jawaban tepat berturut-turut membuka kombo.</p>
- <p class="mut">Waktu bermain sekitar 12 menit. Setiap pilihan datang dengan penjelasan.<br>🎵 Ada musik latar. Tombol suara ada di pojok kanan bawah.</p>
+ <p class="disp" style="font-size:19px;color:var(--blue);margin:6px 0 12px">Uji dan pertajam ide bisnis kelompokmu</p>
+ <p style="margin:0"><b>Enam hal yang akan kamu uji:</b></p>
+ <div class="chips">${D.map(d=>`<span class="chip2">${d.e} ${d.n}</span>`).join("")}</div>
+ <div class="mis" style="margin-top:0"><b>📍 Studi kasus latihan:</b> Kamu siswa SMK. Banyak temanmu jago desain dan edit video, tapi hampir tidak ada yang pernah dapat klien. Di sisi lain, warung, kafe, dan toko di sekitar sekolah butuh konten TikTok dan Instagram tapi bingung mencari siapa yang mengerjakan. Dari celah inilah latihanmu dimulai. Di akhir, kamu menerapkan cara berpikir yang sama pada proyek kelompokmu sendiri.</div>
+ <p>Ada ${L.length} level dengan 3 situasi di tiap level, lalu Gerbang Bukti untuk proyek kelompokmu. Pilih langkah yang paling tepat. Jawaban terbaik memberi XP penuh, dan jawaban tepat berturut-turut membuka kombo.</p>
+ <p style="margin:0"><b>Yang kamu bawa pulang:</b></p>
+ <ul class="gets"><li>Feedback untuk masalah, pelanggan, solusi, value, model bisnis, dan prototype</li><li>Insight untuk memperbaiki BMC dan arah produkmu</li><li>Daftar bagian yang masih perlu divalidasi</li><li>Next action yang jelas sebagai bekal tahap pengembangan dan seleksi November</li></ul>
+ <p class="mut">Waktu bermain sekitar 15 sampai 20 menit. Setiap pilihan datang dengan penjelasan.<br>🎵 Ada musik latar. Tombol suara ada di pojok kanan bawah.</p>
  <button class="btn" id="go">Mulai Ekspedisi</button></div>`;
  $("#go").onclick=()=>{BGM.start();lvIntro()};
 }
 function lvIntro(){
- hud();const l=L[st.lv];
- M.innerHTML=`<div class="card" style="text-align:center"><div class="big">${l.e}</div><div class="lv">LEVEL ${st.lv+1} DARI 5</div><h2 style="font-size:28px">${l.n}</h2>
- <p class="mut">${["Kasusmu: skill siswa SMK yang belum menghasilkan uang.","Siapa klien yang paling butuh dan mau membayar?","Saatnya membuktikan masalah ini benar-benar menyakitkan bagi UMKM.","Uji paket konten manual sebelum membangun platform apa pun."][st.lv]}</p>
+ hud();toTop();const l=L[st.lv],d=D[l.dm];
+ M.innerHTML=`<div class="card" style="text-align:center"><div class="big">${l.e}</div><div class="lv">LEVEL ${st.lv+1} DARI ${L.length}</div><h2 style="font-size:28px">${l.n}</h2>
+ <p style="margin:10px 0 2px"><span class="chip2">${d.e} Fokus uji: ${d.n}</span></p>
+ <p class="mut" style="margin:8px 0 16px">${l.intro}</p>
  <button class="btn" id="go">Masuk Level</button></div>`;
  $("#go").onclick=()=>{st.qi=0;ques()};
 }
 function ques(){
- hud();st.ans=false;const l=L[st.lv],q=l.q[st.qi];
- M.innerHTML=`<div class="card"><div class="lv">${l.e} ${l.n} · Situasi ${st.qi+1} dari 3</div><div class="mas"><span class="mi" id="mi">🤖</span><span class="bub" id="mb">Pilih langkah terbaik ya!</span></div><h2 class="q">${esc(q.t)}</h2><div id="opts"></div><div id="fb"></div></div>`;
+ hud();toTop();st.ans=false;const l=L[st.lv],q=l.q[st.qi];
+ M.innerHTML=`<div class="card"><div class="lv">${l.e} ${l.n} · Situasi ${st.qi+1} dari ${l.q.length}</div><div class="mas"><span class="mi" id="mi">🤖</span><span class="bub" id="mb">Pilih langkah terbaik ya!</span></div><h2 class="q">${esc(q.t)}</h2><div id="opts"></div><div id="fb"></div></div>`;
  const box=$("#opts");
  shuf(q.o).forEach((o,i)=>{const b=document.createElement("button");b.className="opt";b.innerHTML=`<span class="ltr">${"ABCD"[i]}</span><span>${esc(o[0])}</span>`;b.onclick=()=>pick(b,o,q);box.appendChild(b)});
 }
@@ -209,62 +341,104 @@ function pick(b,o,q){
  if(p>=2){st.combo++;if(st.combo>=2)gain+=st.combo*2}else st.combo=0;
  st.best=Math.max(st.best,st.combo);st.xp+=gain;st.sc[st.lv]+=p;hud();
  const head=p===3?"Luar biasa! +"+gain+" XP":p===2?"Cukup baik. +"+gain+" XP":p===1?"Kurang tepat. +"+gain+" XP":"Jebakan! +0 XP";
- const last=st.qi===2;
+ const last=st.qi===L[st.lv].q.length-1;
  $("#fb").innerHTML=`<div class="fb p${p}"><b>${head}</b><p style="margin:6px 0 0">${esc(o[2])}</p>${p<3?`<p style="margin:8px 0 0"><b style="font-size:15px">Langkah terbaik:</b> ${esc(best[0])}</p>`:""}</div><button class="btn" id="nx">${last?"Selesaikan Level":"Lanjut"}</button>`;
  $("#nx").onclick=()=>last?lvDone():(st.qi++,ques());
  $("#nx").focus();
 }
 function lvDone(){
- const s=st.sc[st.lv],stars=s>=8?3:s>=5?2:1,l=L[st.lv];
+ toTop();const s=st.sc[st.lv],stars=s>=8?3:s>=5?2:1,l=L[st.lv],fin=st.lv===L.length-1;
  M.innerHTML=`<div class="card" style="text-align:center"><div class="lv">LEVEL ${st.lv+1} SELESAI</div><h2 style="font-size:28px">${l.n}</h2>
  <div class="stars" aria-label="${stars} dari 3 bintang">${"⭐".repeat(stars)}${"☆".repeat(3-stars)}</div>
- <p class="mut">Skor level: ${s} dari 9. ${stars===3?"Sempurna, kamu berpikir seperti founder yang berbasis bukti.":stars===2?"Bagus, tinggal sedikit lagi.":"Level ini perlu latihan, nanti ada saran di hasil akhir."}</p>
- <button class="btn" id="go">${st.lv<3?"Ke Level Berikutnya":"Menuju Gerbang Prototype"}</button></div>`;
- if(stars>=2)confetti(45);$("#go").onclick=()=>{st.lv++;st.lv<4?lvIntro():gate()};
+ <p class="mut">Skor level: ${s} dari 9. ${stars===3?"Sempurna, kamu berpikir seperti founder yang berbasis bukti.":stars===2?"Bagus, tinggal sedikit lagi.":"Aspek ini perlu latihan, nanti ada saran di hasil akhir."}</p>
+ <button class="btn" id="go">${fin?"Menuju Gerbang Bukti":"Ke Level Berikutnya"}</button></div>`;
+ if(stars>=2)confetti(45);
+ $("#go").onclick=()=>{if(fin)gate();else{st.lv++;lvIntro()}};
 }
 function gate(){
- hud();
- M.innerHTML=`<div class="card"><div class="lv">🚀 LEVEL 5 · GERBANG PROTOTYPE</div><h2 class="q">Pertarungan terakhir: tunjukkan buktinya</h2>
- <p class="mut">Ini bagian yang jujur. Bayangkan kamu menjalankan proyek jasa konten siswa tadi di sekolahmu, atau pakai ide bisnismu sendiri kalau sudah punya. Centang hanya yang benar-benar sudah dikerjakan. Gerbang hanya terbuka untuk bukti.</p>
- <div id="gl"></div><button class="btn" id="go">Buka Gerbang</button></div>`;
- const gl=$("#gl");
- G.forEach((t,i)=>{const lb=document.createElement("label");lb.className="chk";lb.innerHTML=`<input type="checkbox"><span>${esc(t)}</span>`;
- lb.querySelector("input").onchange=e=>{lb.classList.toggle("on",e.target.checked);st.gate[i]=e.target.checked};gl.appendChild(lb)});
- $("#go").onclick=()=>{const n=G.filter((_,i)=>st.gate[i]).length;st.xp+=n*15;st.lv=4;st.done=true;hud();result(n)};
+ hud();toTop();
+ let h=`<div class="card"><div class="lv">🚀 GERBANG BUKTI · PROYEK KELOMPOKMU</div><h2 class="q">Sekarang giliran proyekmu yang sebenarnya</h2>
+ <p class="mut">Latihan tadi memakai studi kasus. Di sini, pikirkan proyek nyata kelompokmu. Centang hanya yang sudah dikerjakan dan punya buktinya, misalnya catatan wawancara, tangkapan layar, atau bukti bayar. Belum dikerjakan? Biarkan kosong. Hasilnya justru menunjukkan apa yang perlu dikerjakan lebih dulu.</p>
+ <label class="l" for="nm">Nama kelompok atau usaha (opsional)</label>
+ <input type="text" id="nm" maxlength="60" placeholder="Contoh: Kelompok 3, Studio Kreatif SMK">`;
+ D.forEach((d,i)=>{h+=`<div class="gh">${d.e} ${d.n}</div><div class="gl" data-d="${i}"></div>`});
+ h+=`<button class="btn" id="go" style="margin-top:8px">Buka Gerbang</button></div>`;
+ M.innerHTML=h;
+ ITEMS.forEach((it,i)=>{const lb=document.createElement("label");lb.className="chk";lb.innerHTML=`<input type="checkbox"><span>${esc(it.c)}</span>`;
+  lb.querySelector("input").onchange=e=>{lb.classList.toggle("on",e.target.checked);st.gate[i]=e.target.checked};
+  document.querySelector(`.gl[data-d="${it.d}"]`).appendChild(lb)});
+ $("#go").onclick=()=>{const n=ITEMS.filter((_,i)=>st.gate[i]).length;st.xp+=n*25;st.name=($("#nm").value||"").trim();st.done=true;hud();result(n)};
 }
-function result(g){
- const tot=st.sc.reduce((a,b)=>a+b,0),pts=tot+g*2,pct=Math.round(pts/48*100);
- const pcts=st.sc.map(s=>Math.round(s/9*100)).concat([Math.round(g/6*100)]);
- const names=L.map(l=>l.n).concat(["Gerbang Prototype"]);
+function result(n){
+ toTop();
+ const sk=[st.sc[0]+st.sc[2],st.sc[1],st.sc[3],st.sc[4],st.sc[5],st.sc[6]];
+ const skp=sk.map((s,i)=>Math.round(s/MX[i]*100));
+ const ev=D.map((_,d)=>[2*d,2*d+1].filter(i=>st.gate[i]).length);
+ const stt=D.map((_,d)=>ev[d]===0?"V":(ev[d]===2&&skp[d]>=60?"K":"T"));
+ const skAll=Math.round(st.sc.reduce((a,b)=>a+b,0)/63*100),evAll=Math.round(n/12*100),ready=Math.round(.4*skAll+.6*evAll);
+ const kk=stt.filter(x=>x==="K").length,vv=stt.filter(x=>x==="V").length;
  let v,cls,msg;
- if(pct>=80&&g>=4){v="🚀 Layak Dibuatkan Prototype";cls="ok";msg="Cara berpikir dan buktimu sudah kuat. Saatnya mengubah temuan menjadi prototype sederhana."}
- else if(pct>=80){v="🟡 Teori Kuat, Bukti Belum Cukup";cls="mid";msg="Pemahamanmu bagus, tapi tahu caranya tidak sama dengan punya bukti. Kumpulkan bukti nyata dulu sebelum membangun."}
- else if(pct>=55&&g>=3){v="🟡 Hampir Siap, Perlu Validasi Tambahan";cls="mid";msg="Fondasimu cukup baik tapi buktinya belum mengunci. Tutup celah di bawah ini sebelum membangun apa pun."}
- else{v="🔴 Belum Layak, Kembali ke Lapangan";cls="bad";msg="Membangun prototype sekarang berisiko membuang waktu dan uang. Perkuat dulu bukti di area terlemah, lalu mainkan ulang."}
- const T=[[0,"Calon Founder Pemula","🌱","Kamu baru melangkah, dan semua founder hebat pernah di titik ini."],[150,"Pengamat Cermat","🔭","Kamu mulai peka melihat masalah, tinggal diasah dengan bukti."],[270,"Detektif Pelanggan","🕵️","Kamu sudah paham cara menggali kebutuhan pelanggan."],[390,"Penguji Handal","🧪","Kamu terbiasa menguji asumsi, bukan sekadar percaya."],[480,"Founder Muda Berbukti","🏅","Keputusanmu didukung bukti. Ini level founder yang siap dipercaya."],[560,"Legenda Startup Sekolah","👑","Nyaris sempurna. Kamu berpikir dan bertindak seperti founder berpengalaman."]];
+ if(kk>=5&&vv===0){v="🚀 Siap Masuk Tahap Pengembangan";cls="ok";msg="Hampir semua aspek utamamu sudah punya bukti dan cara berpikir yang kuat. Fokus berikutnya: rapikan bukti, kembangkan prototype pada fitur inti, dan lengkapi BMC dengan angka nyata."}
+ else if(vv>=3||(kk===0&&vv>=2)){v="🔴 Perlu Validasi Ulang Sebelum Mengembangkan";cls="bad";msg="Terlalu banyak aspek yang masih berupa dugaan. Mengembangkan prototype sekarang berisiko membuang waktu dan uang. Kerjakan next action di bawah dulu, mulai dari aspek yang paling awal."}
+ else{v="🟡 Hampir Siap, Tutup Celah Dulu";cls="mid";msg="Fondasimu sudah ada, tapi beberapa aspek belum terbukti kuat. Tutup celah di bawah ini sebelum menambah fitur atau biaya."}
+ let note="";
+ if(skAll>=70&&evAll<60)note=`Cara berpikirmu kuat (${skAll}%), tapi bukti proyek baru ${n} dari 12. Kamu sudah tahu caranya, sekarang saatnya turun ke lapangan.`;
+ else if(skAll<50&&evAll>=60)note=`Bukti yang kamu klaim cukup banyak (${n} dari 12), tapi skor latihan baru ${skAll}%. Minta mentor memeriksa kualitas buktimu, jangan sampai masih bias.`;
+ const T=[[TH[0],"Calon Founder Pemula","🌱","Kamu baru melangkah, dan semua founder hebat pernah di titik ini."],[TH[1],"Pengamat Cermat","🔭","Kamu mulai peka melihat masalah, tinggal diasah dengan bukti."],[TH[2],"Detektif Pelanggan","🕵️","Kamu sudah paham cara menggali kebutuhan pelanggan."],[TH[3],"Penguji Handal","🧪","Kamu terbiasa menguji asumsi, bukan sekadar percaya."],[TH[4],"Founder Muda Tajam","🏅","Cara berpikirmu sudah setajam founder berpengalaman. Sekarang buktikan juga di proyek nyatamu."],[TH[5],"Legenda Startup Sekolah","👑","Nyaris sempurna. Cara berpikir dan bukti proyekmu berjalan beriringan."]];
  let ti=0;T.forEach((t,i)=>{if(st.xp>=t[0])ti=i});const tt=T[ti],nx=T[ti+1];
- const lp=pcts.slice(0,4),wl=lp.indexOf(Math.min(...lp)),bi=pcts.indexOf(Math.max(...pcts));
- const ms=[];
- if(cls==="ok"){ms.push("Tetapkan 3 fitur inti prototype dari keluhan paling sering dan bagian yang paling dihargai pelanggan.","Tentukan satu metrik sukses yang jelas, misalnya 10 paket konten terjual per bulan.","Bangun prototype sederhana dalam 2 sampai 4 minggu, uji ke minimal 5 pengguna, dan catat apa yang mereka lakukan, bukan apa yang mereka katakan.")}
- else{if(lp[wl]<80)ms.push("<b>"+names[wl]+":</b> "+L[wl].tip);G.forEach((_,i)=>{if(!st.gate[i]&&ms.length<3)ms.push("<b>Bukti:</b> "+GM[i])})}
- const mt=cls==="ok"?"Misi berikutnya: bangun prototype":cls==="mid"?"Misi penutup celah":"Misi kembali ke lapangan";
- const rows=names.map((n,i)=>`<div class="row"><div class="t"><span>${i<4?L[i].e:"🚀"} ${n}</span><span>${pcts[i]}%</span></div><div class="bar"><i style="width:0" data-w="${pcts[i]}%"></i></div></div>`).join("");
- M.innerHTML=`<div class="card"><div class="lv">HASIL EKSPEDISI${st.idea?" · "+esc(st.idea):""}</div>
+ const nm=st.name;
+ const cards=D.map((d,i)=>{
+  const s=stt[i];let mod="";
+  if(skp[i]>=70&&ev[i]<2)mod=`Latihanmu di aspek ini sudah ${skp[i]}%, jadi hambatannya ada di eksekusi. Kerjakan ujinya di lapangan.`;
+  else if(skp[i]<50&&ev[i]>=1)mod=`Skor latihanmu di aspek ini baru ${skp[i]}%. Periksa lagi cara kamu mengujinya bersama mentor supaya buktimu tidak bias.`;
+  else if(skp[i]<50&&ev[i]===0)mod=`Aspek ini masih di tahap awal. Baca ulang penjelasan jawaban di level terkait, lalu mulai uji.`;
+  const li=ITEMS.map((it,j)=>({it,j})).filter(o=>o.it.d===i).map(o=>`<li><span>${st.gate[o.j]?"✅":"⬜"}</span><span>${o.it.a}${st.gate[o.j]?"":" (belum tervalidasi)"}</span></li>`).join("");
+  return `<div class="dc s${s}"><div class="dh"><span class="de">${d.e}</span><h3>${d.n}</h3><span class="badge">${SLE[s]} ${SLP[s]}</span></div>
+  <p class="ask">${d.ask}</p>
+  <div class="mt"><div class="mr"><span>Latihan</span><div class="bar"><i style="width:0" data-w="${skp[i]}%"></i></div><b>${skp[i]}%</b></div>
+  <div class="mr"><span>Bukti proyek</span><span class="dots">${ev[i]>=1?"●":"○"}${ev[i]>=2?"●":"○"}</span><b>${ev[i]}/2</b></div></div>
+  <p style="margin:8px 0 0">${d[s]}</p>${mod?`<p class="mod">${mod}</p>`:""}<ul class="chkl">${li}</ul></div>`}).join("");
+ const bb=BM.map(([nm2,ds])=>({nm:nm2,w:ds.map(i=>stt[i]).sort((a,b)=>RK[b]-RK[a])[0]}));
+ const weak=D.map((_,i)=>i).filter(i=>stt[i]!=="K").sort((a,b)=>RK[stt[b]]-RK[stt[a]]||a-b).slice(0,3);
+ let arah;
+ if(stt.slice(0,3).includes("V"))arah="Berhenti menambah fitur. Masalah, pelanggan, atau solusimu belum terbukti, jadi kembali ke lapangan dan validasi dulu sebelum prototype dikembangkan lagi.";
+ else if(stt[3]!=="K"||stt[4]!=="K")arah="Perjelas value dan model bisnis lebih dulu. Prototype sebagus apa pun tetap sulit dijual kalau pelanggan belum paham untungnya dan angka bisnisnya belum jelas.";
+ else if(stt[5]!=="K")arah="Rapikan prototype pada 3 fitur inti dan uji ke pengguna nyata dengan tugas nyata. Tunda semua fitur tambahan sampai hasil uji terbaca.";
+ else arah="Arahmu sudah jelas: lanjutkan iterasi prototype pada fitur inti, perluas uji ke pengguna baru, dan pantau satu metrik sukses.";
+ const acts=[];
+ D.forEach((d,i)=>{ITEMS.forEach((it,j)=>{if(it.d===i&&!st.gate[j])acts.push({d:i,t:it.t})});
+  if(stt[i]==="T"&&ev[i]===2)acts.push({d:i,t:`Minta mentor memeriksa buktimu di aspek ${d.n}. Skor latihanmu masih ${skp[i]}%, jadi pastikan buktinya tidak bias.`})});
+ for(let k=0;acts.length<3&&k<EXTRA.length;k++)acts.push({d:-1,t:EXTRA[k]});
+ const shown=acts.slice(0,5),more=acts.length-shown.length;
+ const unv=ITEMS.filter((_,j)=>!st.gate[j]);
+ const txt=[`FOUNDER QUEST${nm?" | "+nm:""}`,`Gelar: ${tt[1]} (${st.xp} XP) | Kesiapan: ${ready}%`,`Status: ${v.replace(/^\S+\s/,"")}`,"","FEEDBACK PER ASPEK",...D.map((d,i)=>`- ${d.n}: ${SLP[stt[i]]} (latihan ${skp[i]}%, bukti proyek ${ev[i]}/2)`),"","MASIH PERLU DIVALIDASI",...(unv.length?unv.map(it=>`- ${it.a}`):["- Semua aspek sudah punya bukti awal"]),"","BMC YANG PERLU DITINJAU",...(bb.filter(b=>b.w!=="K").length?bb.filter(b=>b.w!=="K").map(b=>`- ${b.nm}`):["- Tidak ada, rapikan dengan angka nyata"]),"","ARAH PRODUK",arah,"","NEXT ACTION",...shown.map((a,i)=>`${i+1}. [${WK[i]}] ${a.t}`)].join("\n");
+ M.innerHTML=`<div class="card"><div class="lv">HASIL EKSPEDISI${nm?" · "+esc(nm):""}</div>
  <div class="big" style="font-size:60px">${tt[2]}</div>
  <h2 style="font-size:28px">${tt[1]}</h2>
  <p style="margin:6px 0">${tt[3]}</p>
- <p class="mut">Peringkat ${ti+1} dari 6 · ${st.xp} XP${nx?" · "+(nx[0]-st.xp)+" XP lagi menuju "+nx[1]:" · Peringkat tertinggi!"}<br>Skor kesiapan ${pct}% · Kombo terbaik x${st.best} · Bukti gerbang ${g} dari 6 · Kekuatan utama: ${names[bi]}</p>
- <div class="verdict" style="background:var(--${cls==="ok"?"ok":cls==="mid"?"mid":"bad"})"><h3 style="font-size:21px;margin-bottom:6px">${v}</h3><p style="margin:0">${msg}</p></div>
- ${rows}
- <div class="mis"><h3 style="font-size:19px;margin-bottom:8px">🎯 ${mt}</h3><ol style="margin:0;padding-left:20px">${ms.map(m=>`<li style="margin-bottom:8px">${m}</li>`).join("")}</ol></div>
- <p class="mut" style="font-size:14px">Catatan: asesmen ini mengukur cara berpikir dan bukti yang kamu laporkan sendiri. Hasilnya panduan refleksi, bukan jaminan keberhasilan bisnis.</p>
- <div class="acts"><button class="btn" id="re">Main Lagi</button><button class="btn alt" id="cp">Salin Ringkasan</button></div><p id="cm" class="mut" style="font-size:14px"></p></div>`;
- if(cls==="ok"||ti>=4)confetti(100);requestAnimationFrame(()=>setTimeout(()=>document.querySelectorAll(".bar i").forEach(i=>i.style.width=i.dataset.w),60));
- $("#re").onclick=()=>{Object.assign(st,{lv:0,qi:0,xp:0,combo:0,best:0,sc:[0,0,0,0],gate:[],done:false,ans:false});intro()};
- $("#cp").onclick=()=>{
-  const txt=`Founder Quest${st.idea?" ("+st.idea+")":""}\nGelar: ${tt[1]} (${st.xp} XP)\nSkor kesiapan: ${pct}%\nVerdict: ${v.replace(/^\S+\s/,"")}\n`+names.map((n,i)=>`- ${n}: ${pcts[i]}%`).join("\n");
-  const ok=()=>$("#cm").textContent="Ringkasan tersalin.",no=()=>$("#cm").textContent="Gagal menyalin, silakan salin manual.";
-  try{navigator.clipboard.writeText(txt).then(ok,no)}catch(e){no()}};
+ <p class="mut">Peringkat ${ti+1} dari 6 · ${st.xp} XP${nx?" · "+(nx[0]-st.xp)+" XP lagi menuju "+nx[1]:" · Peringkat tertinggi!"}<br>Kesiapan ${ready}% (latihan ${skAll}%, bukti proyek ${n} dari 12) · Kombo terbaik x${st.best}</p>
+ <div class="verdict" style="background:var(--${cls})"><h3 style="font-size:21px;margin-bottom:6px">${v}</h3><p style="margin:0">${msg}</p></div>
+ ${note?`<p class="mut" style="margin:10px 0">${note}</p>`:""}
+ <div class="chips">${D.map((d,i)=>`<span class="chip2">${d.e} ${d.n} ${IC[stt[i]]}</span>`).join("")}</div>
+ <p class="mut" style="font-size:14px;margin:0">🟢 kuat · 🟡 perlu dipertajam · 🔴 perlu validasi</p></div>
+ <div class="card"><h2 class="sh">📋 Feedback per aspek</h2>
+ <p class="sub">Latihan adalah cara berpikirmu di game. Bukti proyek adalah yang kamu centang di Gerbang Bukti. Status memadukan keduanya.</p>${cards}</div>
+ <div class="card"><h2 class="sh">🗺️ Insight untuk BMC dan arah produk</h2>
+ <p class="sub">Warna tiap kotak mengikuti hasil aspek yang terkait. Ini panduan awal. Isi BMC aslinya tetap dinilai bersama mentor.</p>
+ <div class="bmc">${bb.map(b=>`<div class="bb s${b.w}"><span>${IC[b.w]}</span>${b.nm}</div>`).join("")}</div>
+ ${weak.length?`<p style="margin:14px 0 6px"><b>Kotak yang perlu direvisi lebih dulu:</b></p><ul class="gets">${weak.map(i=>`<li><b>${D[i].n}</b> (${D[i].bmc}): ${D[i].bt}</li>`).join("")}</ul>`:`<p style="margin:14px 0 6px"><b>Semua aspek kuat.</b> Rapikan BMC dengan angka nyata dari ujimu.</p>`}
+ <div class="mis"><b>🧭 Arah produk:</b> ${arah}</div></div>
+ <div class="card"><h2 class="sh">✅ Next action</h2>
+ <p class="sub">Urut dari yang paling mendasar, karena aspek di belakang bergantung pada aspek di depannya.</p>
+ ${shown.map((a,i)=>`<div class="ac"><span class="w">${WK[i]}</span><div>${a.d>=0?`<b>${D[a.d].e} ${D[a.d].n}:</b> `:`<b>⭐ Penguat:</b> `}${a.t}</div></div>`).join("")}
+ ${more>0?`<p class="mut" style="font-size:14px">Masih ada ${more} tugas lain di daftar validasi. Kerjakan setelah lima di atas selesai.</p>`:""}
+ <p class="mut" style="font-size:14px">Catatan: asesmen ini mengukur cara berpikir dan bukti yang kamu laporkan sendiri. Hasilnya panduan refleksi untuk sesi mentoring, bukan penentu hasil seleksi.</p>
+ <div class="acts"><button class="btn" id="re">Main Lagi</button><button class="btn alt" id="cp">Salin Ringkasan</button></div><p id="cm" class="mut" style="font-size:14px"></p><div id="ta"></div></div>`;
+ if(cls==="ok"||ti>=4)confetti(100);
+ requestAnimationFrame(()=>setTimeout(()=>document.querySelectorAll(".bar i").forEach(i=>i.style.width=i.dataset.w),60));
+ $("#re").onclick=()=>{Object.assign(st,{lv:0,qi:0,xp:0,combo:0,best:0,sc:[0,0,0,0,0,0,0],gate:[],name:"",done:false,ans:false});intro()};
+ const manual=()=>{$("#cm").textContent="Gagal menyalin otomatis. Teks di bawah bisa kamu salin manual.";$("#ta").innerHTML=`<textarea class="ta" readonly aria-label="Ringkasan hasil"></textarea>`;const t=document.querySelector("#ta textarea");t.value=txt;t.focus();t.select()};
+ $("#cp").onclick=()=>{try{navigator.clipboard.writeText(txt).then(()=>{$("#cm").textContent="Ringkasan tersalin.";$("#ta").innerHTML=""},manual)}catch(e){manual()}};
 }
 const MD={3:["🤩","Mantap! Itu insting founder sejati!"],2:["😎","Lumayan! Dikit lagi sempurna."],1:["🤔","Hmm, masih ada yang lebih tajam nih."],0:["😵","Awas jebakan! Tenang, ini buat belajar."]};
 function mood(p){const i=$("#mi"),b=$("#mb");if(!i)return;BGM.sfx(p);i.textContent=MD[p][0];b.textContent=MD[p][1];i.className="mi "+(p>=2?"hop":"wig");if(p===3)confetti(28)}
